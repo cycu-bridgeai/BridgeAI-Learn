@@ -1,1 +1,1 @@
-# Bridge-AI-Learn
+# BridgeAI-Learn

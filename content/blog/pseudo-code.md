@@ -1,0 +1,94 @@
+---
+title: 寫 Code 總卡在括號和排版？
+description: BridgeAI 助手實測：一個開發者的真實體驗
+date: 2026-03-20
+tags:
+  - ai
+---
+
+我常常盯著螢幕發呆。
+
+說實話，有時候最痛苦的不是演算法想不出來，而是邏輯明明都想好了，但就是會漏打一個大括號，或是迴圈的條件不小心寫反，結果光是抓這些語法小 Bug 就耗掉大半天。
+
+BridgeAI 這東西的「**AI 程式助手**」拿來理順邏輯很好用。我心想，大概又是個噱頭大於實用的半成品吧？畢竟現在很多 AI 工具總是喜歡一次生出一大坨不能跑的 Code。
+
+結果一試，欸，還真不是那麼回事。它主打的是 <span style="color:#e67e22; font-weight:bold;">「逐行建構」</span> 和 <span style="color:#e67e22; font-weight:bold;">「區塊管理」</span>。用了一陣子後，我整理了這 9 個真正改變我開發節奏的基礎操作。
+
+---
+
+## <span style="color:#2c3e50;">基礎輸入與修改：動口不動手</span>
+
+### <span style="color:#2980b9;">1. 輸入邏輯：一行一行來，反而最踏實</span>
+它的運作邏輯很單純，就是「逐行翻譯」。你在輸入框用白話文描述一個動作（例如：*宣告變數 i 等於 0*），按下 <kbd>Enter</kbd>，它就幫你把那行的程式碼寫出來。
+我其實滿喜歡這種設計的。比起 AI 一次通靈出一堆黑魔法，這種逐行寫的方式反而更踏實，讓專案完全保持在自己的掌控中。
+
+>![image](https://hackmd.io/_uploads/HkrtBQbo-g.png)
+
+
+### <span style="color:#2980b9;">2. 修改描述：寫錯了？點一下就能改</span>
+有時候 AI 翻譯出來的虛擬碼跟我想的不一樣。這時候不用刪掉重打！只要 <span style="color:#27ae60; font-weight:bold;">直接點擊左側的描述文字</span> 就能修改。改完按 <kbd>Enter</kbd> 確認，右邊的程式碼就會即時更新。這比在傳統編輯器裡慢慢用游標尋找、刪除替換要直覺太多了。
+
+>![修改描述](https://hackmd.io/_uploads/SJatXKbsbl.gif)
+
+
+---
+
+## <span style="color:#2c3e50;">版面控制：拯救強迫症的排版工具</span>
+
+### <span style="color:#2980b9;">3. 指定插入位置：不再迷失方向</span>
+寫到一半突然想在前面補個變數宣告？在這邊你只要 <span style="color:#d35400; font-weight:bold;">點擊任意兩行程式碼之間的「細帶」</span>，游標就會精準卡在那裡。接下來你輸入的邏輯，就會乖乖插在這個位置，不會永遠跑到最後一行。想取消的話按 <kbd>Esc</kbd> 就行。
+
+>![image](https://hackmd.io/_uploads/rJhRP9ZiWl.png)
+
+
+### <span style="color:#2980b9;">4. 結束區塊：括號遺忘症的救星</span>
+對寫 C++ 或 Java 的人來說，漏掉 `}` 簡直是日常。在 BridgeAI 裡，當你開了 `for` 或 `if` 之後，可以直接點介面上的「結束區塊」按鈕；或者直接在輸入框打 <kbd>end if</kbd> 或 <kbd>}</kbd>，按下 <kbd>Enter</kbd> 它就會幫你把區塊完美閉合。
+
+>![image](https://hackmd.io/_uploads/r1O5GoZiWg.png)
+
+
+
+### <span style="color:#2980b9;">5. 拖曳排序：像玩積木一樣寫 Code</span>
+有時候發現兩個步驟的順序寫反了，以前只能剪下貼上，還常把縮排弄亂。現在你只要把滑鼠移過去，按住左側的 <span style="color:#8e44ad; font-weight:bold;">::</span> 圖示，<span style="color:#8e44ad; font-weight:bold;">直接上下拖曳</span> 就能交換順序。超級舒壓。
+
+>![移動](https://hackmd.io/_uploads/B1VDj9-ibg.gif)
+
+### <span style="color:#2980b9;">6. 刪除行：一鍵清爽</span>
+測試用的程式碼不需要了？滑鼠移過去，點擊右側的 <span style="color:#e74c3c; font-weight:bold;">×</span> 按鈕，或是直接按鍵盤的 <kbd>Delete</kbd> 鍵，瞬間清空。保持版面乾淨，思緒也會跟著清楚。
+
+>![image](https://hackmd.io/_uploads/Hkdx7s-s-g.png)
+
+---
+
+## <span style="color:#2c3e50;">快捷操作：鍵盤流的最愛</span>
+
+### <span style="color:#2980b9;">7. 快速移行：雙手不離鍵盤</span>
+這是我最在意的部分，因為寫 Code 的時候能不用滑鼠就不用滑鼠。
+當輸入框是空白的時候，直接按 <kbd>↑</kbd> 或 <kbd>↓</kbd> 就能在行間移動選取（會出現紫色的提示框）。選到特定行之後，按住 <kbd>Alt</kbd> + <kbd>↑</kbd> 或 <kbd>↓</kbd>，就能直接把那行程式碼上下搬移。這操作手感真的有做出來。
+
+> ![移動上下鍵](https://hackmd.io/_uploads/S1Fi7o-i-l.gif)
+
+
+### <span style="color:#2980b9;">8. 插入編輯器：一鍵整併的爽感</span>
+在助手區把邏輯理順、排序好之後，重頭戲來了。
+你可以選擇單行插入，但我通常都是點底部的「全部插入編輯器」，或者直接按終極快捷鍵 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>。看著剛剛辛苦整理好的邏輯，一次性完美排進左邊的主編輯區裡，真的有一種說不出的成就感。
+
+>![插入](https://hackmd.io/_uploads/ryPRDibo-l.gif)
+
+
+
+### <span style="color:#2980b9;">9. 復原 / 重做：你的時光機</span>
+寫壞了怎麼辦？直接按 <kbd>Ctrl</kbd> + <kbd>Z</kbd>。
+它最多可以復原 50 步，不管是剛剛打錯的字、刪錯的行還是拖錯的順序，通通可以救回來。有了這個機制，我就敢更大膽地去嘗試不同的邏輯組合，不用怕把原本能跑的 Code 搞爛。
+
+> 
+
+---
+
+## <span style="color:#2c3e50;">寫在最後</span>
+
+說實話，BridgeAI 的程式助手不是那種「你給一句話，它幫你寫完一個系統」的神仙 AI。
+
+它的真實定位，更像是一個 <span style="color:#16a085; font-weight:bold;">「語法翻譯機＋邏輯梳理板」</span>。它逼著你一行一行把開發邏輯想清楚，然後它負責幫你處理掉那些煩人的語法、縮排和括號細節。
+
+如果你也跟我一樣，常常邏輯沒問題，卻老是卡在語法小失誤；或者你習慣先把虛擬碼列好再動手寫，那我滿推薦你試試看這種開發節奏的。反正上手也只要三分鐘，打開介面敲幾行試試看吧！
