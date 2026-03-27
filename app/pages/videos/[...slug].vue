@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ContentYoutubeEmbed from '~/components/content/YoutubeEmbed.vue'
+
 const route = useRoute()
 const slug = (route.params.slug as string[]).join('/')
 
