@@ -251,18 +251,6 @@ pnpm preview
 
 ---
 
-## 📄 授權
-
-MIT License
-
----
-
-## 👤 貢獻者
-
-BridgeAI Team
-
----
-
-## 📞 聯繫方式
+##  聯繫方式
 
 有問題或建議？歡迎提交 Issue 或 Pull Request！
