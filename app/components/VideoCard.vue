@@ -27,9 +27,9 @@ function formatDate(dateStr: string) {
 <template>
   <NuxtLink
     :to="video.path"
-    class="group block bg-white dark:bg-gray-950 rounded-lg sm:rounded-xl border-l-4 border-l-red-500 dark:border-l-red-600 border-r border-r-gray-200 dark:border-r-gray-800 border-t border-t-gray-200 dark:border-t-gray-800 border-b border-b-gray-200 dark:border-b-gray-800 overflow-hidden shadow-sm hover:shadow-lg dark:shadow-md dark:hover:shadow-lg hover:border-l-red-600 dark:hover:border-l-red-500 transition-all duration-300"
+    class="group block bg-white dark:bg-gray-900 rounded-lg sm:rounded-xl border-l-4 border-l-red-500 dark:border-l-red-600 border-r border-r-gray-200 dark:border-r-gray-700 border-t border-t-gray-200 dark:border-t-gray-700 border-b border-b-gray-200 dark:border-b-gray-700 overflow-hidden shadow-sm hover:shadow-lg dark:shadow-md dark:hover:shadow-lg hover:border-l-red-600 dark:hover:border-l-red-500 transition-all duration-300"
   >
-    <div class="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800">
+    <div class="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
       <img :src="thumbnail" :alt="video.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
       <!-- Dark overlay on hover -->
       <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300" />

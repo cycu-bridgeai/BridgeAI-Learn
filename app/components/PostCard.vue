@@ -34,24 +34,13 @@ const gradientColor = computed(() => {
 <template>
   <NuxtLink
     :to="post.path"
-    class="group block bg-white dark:bg-gray-950 rounded-lg sm:rounded-xl border-l-4 border-l-blue-500 dark:border-l-blue-600 border-r border-r-gray-200 dark:border-r-gray-800 border-t border-t-gray-200 dark:border-t-gray-800 border-b border-b-gray-200 dark:border-b-gray-800 overflow-hidden shadow-sm hover:shadow-lg dark:shadow-md dark:hover:shadow-lg hover:border-l-blue-600 dark:hover:border-l-blue-500 transition-all duration-300"
+    class="group block bg-white dark:bg-gray-900 rounded-lg sm:rounded-xl border-l-4 border-l-blue-500 dark:border-l-blue-600 border-r border-r-gray-200 dark:border-r-gray-700 border-t border-t-gray-200 dark:border-t-gray-700 border-b border-b-gray-200 dark:border-b-gray-700 overflow-hidden shadow-sm hover:shadow-lg dark:shadow-md dark:hover:shadow-lg hover:border-l-blue-600 dark:hover:border-l-blue-500 transition-all duration-300"
   >
     <div v-if="post.thumbnail" class="aspect-video overflow-hidden">
       <img :src="post.thumbnail" :alt="post.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
     </div>
-    <div v-else :class="`aspect-video bg-gradient-to-br ${gradientColor} flex items-center justify-center relative overflow-hidden transition-colors duration-300`">
-      <!-- Animated background pattern -->
-      <div class="absolute inset-0 opacity-20 dark:opacity-30">
-        <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <circle cx="10" cy="10" r="2" fill="currentColor" />
-            </pattern>
-          </defs>
-          <rect width="100" height="100" fill="url(#dots)" />
-        </svg>
-      </div>
-      <svg class="w-8 sm:w-12 h-8 sm:h-12 text-blue-300 dark:text-blue-400 relative z-10 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div v-else :class="`aspect-video bg-gradient-to-br ${gradientColor} flex items-center justify-center transition-colors duration-300`">
+      <svg class="w-8 sm:w-12 h-8 sm:h-12 text-blue-400 dark:text-blue-300 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
       </svg>
     </div>
