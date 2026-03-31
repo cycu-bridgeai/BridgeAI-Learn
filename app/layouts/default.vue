@@ -30,8 +30,8 @@ function toggleTheme() {
 </script>
 
 <template>
-  <div class="min-h-screen bg-white dark:bg-gray-950 transition-colors duration-300 flex flex-col">
-    <header class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-10 transition-colors duration-300">
+  <div class="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 flex flex-col">
+    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-10 transition-colors duration-300">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <NuxtLink to="/" class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
           BridgeAI Learn
@@ -64,7 +64,7 @@ function toggleTheme() {
       <slot />
     </main>
 
-    <footer class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 mt-auto transition-colors duration-300">
+    <footer class="border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 mt-auto transition-colors duration-300">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-400 dark:text-gray-500">
         © {{ new Date().getFullYear() }} BridgeAI Learn
       </div>
