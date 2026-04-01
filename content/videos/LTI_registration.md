@@ -2,6 +2,7 @@
 title: Bridge AI 智慧教學平台與 iLearning2.0 整合操作指南
 description: 一步步完成 LTI 申請、系統綁定，讓 AI 教學與自動評測無縫進入你的課程
 date: 2026-03-30
+youtubeId: I71-u7ZOn-Q
 tags:
   - lti
   - ilearning
