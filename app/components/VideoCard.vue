@@ -25,17 +25,19 @@ function formatDate(dateStr: string) {
 </script>
 
 <template>
-  <NuxtLink
-    :to="video.path"
-    class="group block bg-white dark:bg-gray-900 rounded-lg sm:rounded-xl border-l-4 border-l-red-500 dark:border-l-red-600 border-r border-r-gray-200 dark:border-r-gray-700 border-t border-t-gray-200 dark:border-t-gray-700 border-b border-b-gray-200 dark:border-b-gray-700 overflow-hidden shadow-sm hover:shadow-lg dark:shadow-md dark:hover:shadow-lg hover:border-l-red-600 dark:hover:border-l-red-500 transition-all duration-300"
+  <div
+    class="group relative flex flex-col bg-white dark:bg-gray-950 rounded-lg sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-[0_0_15px_rgba(239,68,68,0.4)] hover:-translate-y-0.5 transition-all duration-300 h-full border border-gray-100 dark:border-gray-800"
   >
-    <div class="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
-      <img :src="thumbnail" :alt="video.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+    <!-- Card Link (covers whole card) -->
+    <NuxtLink :to="video.path" class="absolute inset-0 z-0" :aria-label="video.title" />
+
+    <div class="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700 shrink-0">
+      <img :src="thumbnail" :alt="video.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
       <!-- Dark overlay on hover -->
       <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300" />
       <!-- Play button overlay -->
       <div class="absolute inset-0 flex items-center justify-center">
-        <div class="w-10 sm:w-14 h-10 sm:h-14 bg-red-600 dark:bg-red-700 bg-opacity-90 rounded-full flex items-center justify-center shadow-xl group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300 hover:animate-pulse">
+        <div class="w-10 sm:w-14 h-10 sm:h-14 bg-red-600 dark:bg-red-700 bg-opacity-90 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-all duration-300">
           <svg class="w-4 sm:w-6 h-4 sm:h-6 text-white ml-0.5 sm:ml-1" fill="currentColor" viewBox="0 0 20 20">
             <path d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.344-5.891a1.5 1.5 0 000-2.538L6.3 2.84z" />
           </svg>
@@ -46,22 +48,27 @@ function formatDate(dateStr: string) {
         點擊觀看
       </div>
     </div>
-    <div class="p-3 sm:p-5">
-      <div v-if="video.tags?.length" class="flex flex-wrap gap-2 mb-2 sm:mb-3">
-        <span
-          v-for="tag in video.tags"
-          :key="tag"
-          class="px-2 sm:px-3 py-0.5 sm:py-1 bg-red-50 dark:bg-red-900/40 text-red-700 dark:text-red-300 text-xs font-semibold rounded-full border border-red-200 dark:border-red-700 hover:bg-red-100 dark:hover:bg-red-900/60 hover:border-red-300 dark:hover:border-red-600 transition-all duration-200"
-        >
-          {{ tag }}
-        </span>
-      </div>
-      <h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-white dark:drop-shadow-md mb-1 sm:mb-2 group-hover:text-red-600 dark:group-hover:text-gray-100 transition-colors line-clamp-2 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-red-500 dark:after:bg-white after:transition-all after:duration-300 group-hover:after:w-full">
+
+    <div class="p-4 sm:p-6 flex flex-col flex-1 relative z-10 pointer-events-none">
+      <h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-white dark:drop-shadow-md mb-2 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors line-clamp-2">
         {{ video.title }}
       </h3>
-      <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 dark:drop-shadow-sm line-clamp-2 mb-2 sm:mb-3">{{ video.description }}</p>
-      <time class="text-xs text-gray-400 dark:text-gray-400">{{ formatDate(video.date) }}</time>
+      <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 dark:drop-shadow-sm line-clamp-2 mb-4">{{ video.description }}</p>
+      
+      <div class="mt-auto pt-4 border-t border-gray-50 dark:border-gray-800 flex flex-wrap items-center gap-y-2 pointer-events-auto">
+        <time class="text-xs text-gray-400 dark:text-gray-500 mr-3 shrink-0">{{ formatDate(video.date) }}</time>
+        
+        <div v-if="video.tags?.length" class="flex flex-wrap gap-2">
+          <NuxtLink
+            v-for="tag in video.tags"
+            :key="tag"
+            :to="`/tags/${tag}`"
+            class="px-2 py-0.5 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-300 text-[10px] sm:text-xs font-semibold rounded-full hover:bg-red-100 dark:hover:bg-red-800/50 transition-colors z-20"
+          >
+            #{{ tag }}
+          </NuxtLink>
+        </div>
+      </div>
     </div>
-  </NuxtLink>
+  </div>
 </template>
-

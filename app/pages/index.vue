@@ -55,13 +55,13 @@ const { data: latestVideos } = await useAsyncData('home-videos', () =>
         <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 animate-fadeInUp animation-delay-400">
           <NuxtLink 
             to="/blog" 
-            class="px-6 sm:px-8 py-2.5 sm:py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-700 dark:to-blue-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 active:scale-95 dark:hover:from-blue-600 dark:hover:to-blue-700 text-sm sm:text-base"
+            class="px-6 sm:px-8 py-2.5 sm:py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-700 dark:to-blue-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300 active:scale-95 dark:hover:from-blue-600 dark:hover:to-blue-700 text-sm sm:text-base"
           >
             Read Blog
           </NuxtLink>
           <NuxtLink 
             to="/videos" 
-            class="px-6 sm:px-8 py-2.5 sm:py-3.5 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold rounded-lg border-2 border-gray-300 dark:border-gray-600 shadow-sm hover:shadow-lg hover:scale-105 hover:border-gray-400 dark:hover:border-gray-500 transition-all duration-300 active:scale-95 text-sm sm:text-base"
+            class="px-6 sm:px-8 py-2.5 sm:py-3.5 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold rounded-lg border-2 border-gray-300 dark:border-gray-600 shadow-sm hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:scale-105 hover:border-gray-400 dark:hover:border-gray-500 transition-all duration-300 active:scale-95 text-sm sm:text-base"
           >
             Watch Videos
           </NuxtLink>
@@ -72,22 +72,27 @@ const { data: latestVideos } = await useAsyncData('home-videos', () =>
       <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-400 dark:via-blue-600 to-transparent opacity-30 dark:opacity-20" />
     </section>
 
-    <!-- Latest Posts -->
-    <section v-if="latestPosts?.length" class="mb-10 sm:mb-14 bg-white dark:bg-gray-900 py-6 sm:py-0">
+    <!-- Latest Posts - Bento Grid Style -->
+    <section v-if="latestPosts?.length" class="mb-10 sm:mb-14 bg-white dark:bg-gray-900 py-6 sm:py-0 mt-10 sm:mt-16">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">Latest Articles</h2>
-        <NuxtLink to="/blog" class="text-xs sm:text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold transition-colors">View all →</NuxtLink>
+        <NuxtLink to="/blog" class="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-semibold text-xs sm:text-sm rounded-lg hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:scale-105 transition-all duration-300">View all →</NuxtLink>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <PostCard v-for="post in latestPosts" :key="post.path" :post="post" />
       </div>
     </section>
 
+    <!-- Divider -->
+    <div class="my-12 sm:my-16">
+      <div class="h-1 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent rounded" />
+    </div>
+
     <!-- Latest Videos -->
     <section v-if="latestVideos?.length" class="bg-white dark:bg-gray-900 py-6 sm:py-0">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">Latest Videos</h2>
-        <NuxtLink to="/videos" class="text-xs sm:text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold transition-colors">View all →</NuxtLink>
+        <NuxtLink to="/videos" class="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-semibold text-xs sm:text-sm rounded-lg hover:shadow-[0_0_15px_rgba(239,68,68,0.4)] hover:scale-105 transition-all duration-300">View all →</NuxtLink>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <VideoCard v-for="video in latestVideos" :key="video.path" :video="video" />
