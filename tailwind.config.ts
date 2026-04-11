@@ -51,6 +51,25 @@ export default {
               color: 'inherit',
               fontWeight: 'inherit',
             },
+            h2: {
+              color: '#1e293b',
+              fontWeight: '800',
+            },
+            h3: {
+              color: '#2563eb',
+              fontWeight: '700',
+            },
+            strong: {
+              color: '#059669',
+            },
+            kbd: {
+              backgroundColor: '#f3f4f6',
+              border: '1px solid #d1d5db',
+              borderRadius: '0.375rem',
+              padding: '0.25rem 0.5rem',
+              fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace',
+              fontSize: '0.875em',
+            },
             blockquote: {
               borderLeftWidth: '4px',
               borderLeftColor: '#3b82f6',
@@ -76,6 +95,26 @@ export default {
             },
             'code::before': { content: '""' },
             'code::after': { content: '""' },
+          },
+        },
+        invert: {
+          css: {
+            h2: {
+              color: '#f1f5f9',
+              fontWeight: '800',
+            },
+            h3: {
+              color: '#60a5fa',
+              fontWeight: '700',
+            },
+            strong: {
+              color: '#10b981',
+            },
+            kbd: {
+              backgroundColor: '#374151',
+              border: '1px solid #6b7280',
+              color: '#e5e7eb',
+            },
           },
         },
       },

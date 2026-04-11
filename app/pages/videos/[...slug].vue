@@ -54,7 +54,7 @@ function formatDate(dateStr: string) {
     <ContentYoutubeEmbed :id="video.youtubeId" :title="video.title" class="mb-10" />
 
     <!-- Additional content / notes -->
-    <div v-if="video.body" class="prose prose-gray dark:prose-invert prose-lg max-w-none dark:text-gray-300">
+    <div v-if="video.body" class="prose prose-slate dark:prose-invert prose-lg max-w-none">
       <ContentRenderer :value="video" />
     </div>
   </article>

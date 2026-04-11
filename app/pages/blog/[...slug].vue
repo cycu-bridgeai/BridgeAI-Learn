@@ -47,10 +47,13 @@ function formatDate(dateStr: string) {
           </NuxtLink>
         </div>
       </div>
+
+      <!-- Thumbnail -->
+      <img v-if="post.thumbnail" :src="post.thumbnail" :alt="post.title" class="w-full rounded-2xl object-cover mt-6" />
     </header>
 
     <!-- Content -->
-    <div class="prose prose-gray dark:prose-invert prose-lg max-w-none dark:text-gray-300">
+    <div class="prose prose-slate dark:prose-invert prose-lg max-w-none">
       <ContentRenderer :value="post" />
     </div>
   </article>

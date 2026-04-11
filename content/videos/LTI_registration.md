@@ -14,71 +14,71 @@ tags:
 
 ---
 
-## <span style="color:#2c3e50;">第一步：申請 LTI 參數</span>
+## 第一步：申請 LTI 參數
 
-### <span style="color:#2980b9;">1. 註冊與申請</span>
+### 1. 註冊與申請
 
-前往 <span style="color:#e67e22; font-weight:bold;">Bridge AI 首頁</span>，點擊右上角的「**申請 LTI**」按鈕，即可開啟申請流程。
+前往 **Bridge AI 首頁**，點擊右上角的「申請 LTI」按鈕，即可開啟申請流程。
 
-### <span style="color:#2980b9;">2. 填寫申請資料</span>
+### 2. 填寫申請資料
 
-在申請表單中填寫您的 <span style="color:#27ae60; font-weight:bold;">系所名稱</span> 與 <span style="color:#27ae60; font-weight:bold;">教師信箱</span>，送出後等待審核。
+在申請表單中填寫您的 **系所名稱** 與 **教師信箱**，送出後等待審核。
 
-### <span style="color:#2980b9;">3. 收取專屬參數</span>
+### 3. 收取專屬參數
 
-審核通過後，系統會將一組 <span style="color:#8e44ad; font-weight:bold;">專屬 LTI 參數</span> 寄至您的信箱，其中包含：
+審核通過後，系統會將一組 **專屬 LTI 參數** 寄至您的信箱，其中包含：
 
-- **一組網址**
-- **兩組密鑰**
+- 一組網址
+- 兩組密鑰
 
 > 收到信後請先保留此畫面，下一步會用到。
 
 ---
 
-## <span style="color:#2c3e50;">第二步：於 iLearning2.0 進行系統綁定</span>
+## 第二步：於 iLearning2.0 進行系統綁定
 
-### <span style="color:#2980b9;">1. 新增外部工具</span>
+### 1. 新增外部工具
 
-回到 iLearning2.0 的課程頁面，依序點選 <span style="color:#d35400; font-weight:bold;">「更多」→「LTI External Tools」→「新增工具」</span>。
+回到 iLearning2.0 的課程頁面，依序點選 **「更多」→「LTI External Tools」→「新增工具」**。
 
-### <span style="color:#2980b9;">2. 輸入 LTI 參數</span>
+### 2. 輸入 LTI 參數
 
-輸入工具名稱，並將剛才收到的 <span style="color:#2980b9; font-weight:bold;">網址與兩組密鑰</span> 依序貼入對應的欄位中。
+輸入工具名稱，並將剛才收到的 **網址與兩組密鑰** 依序貼入對應的欄位中。
 
-### <span style="color:#2980b9;">3. 設定啟用容器</span>
+### 3. 設定啟用容器
 
-將「**預設啟用容器**」選項更改為 <span style="color:#e67e22; font-weight:bold;">「新視窗」</span>，確保平台能正確開啟。
+將「預設啟用容器」選項更改為 **「新視窗」**，確保平台能正確開啟。
 
-### <span style="color:#2980b9;">4. 服務與隱私權設定</span>
+### 4. 服務與隱私權設定
 
 這一步很重要，直接影響成績同步是否正常：
 
-- **服務設定**：勾選最下方的選項
-- **隱私權設定**：將所有選項都改為 <span style="color:#e74c3c; font-weight:bold;">「永遠」</span>，以確保師生的帳號與成績能夠正確同步
+- 服務設定：勾選最下方的選項
+- 隱私權設定：將所有選項都改為 **「永遠」**，以確保師生的帳號與成績能夠正確同步
 
-### <span style="color:#2980b9;">5. 完成綁定</span>
+### 5. 完成綁定
 
-設定確認無誤後點選「**儲存**」，即完成系統綁定。
+設定確認無誤後點選「儲存」，即完成系統綁定。
 
 ---
 
-## <span style="color:#2c3e50;">第三步：將平台加入課程與後續管理</span>
+## 第三步：將平台加入課程與後續管理
 
-### <span style="color:#2980b9;">1. 在課程中新增活動</span>
+### 1. 在課程中新增活動
 
-在課程區塊點選 <kbd>+</kbd>，選擇「**新增活動或資源**」，找到 <span style="color:#8e44ad; font-weight:bold;">Bridge AI</span> 並輸入名稱後儲存，即可將其作為工具加入課程。
+在課程區塊點選 <kbd>+</kbd>，選擇「新增活動或資源」，找到 **Bridge AI** 並輸入名稱後儲存，即可將其作為工具加入課程。
 
-### <span style="color:#2980b9;">2. 自動登入與名單同步</span>
+### 2. 自動登入與名單同步
 
-往後只需點擊該課程連結，系統便會 <span style="color:#16a085; font-weight:bold;">自動帶您登入平台並同步課程名單</span>，無需額外操作。
+往後只需點擊該課程連結，系統便會 **自動帶您登入平台並同步課程名單**，無需額外操作。
 
-### <span style="color:#2980b9;">3. 課程管理</span>
+### 3. 課程管理
 
 登入後，教師便可以在 Bridge AI 平台上完成相關的課程設定、作業管理等所有工作。
 
 ---
 
-## <span style="color:#2c3e50;">完成了！</span>
+## 完成了！
 
 整個 LTI 整合流程到這裡就完成了。從申請到上線，通常只需要等待審核通過就能開始使用。
 
