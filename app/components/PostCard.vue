@@ -29,6 +29,26 @@ const gradientColor = computed(() => {
   const hash = props.post.title.charCodeAt(0) + props.post.title.length
   return colors[hash % colors.length]
 })
+
+const config = useRuntimeConfig()
+
+const thumbnailSrc = computed(() => {
+  const thumbnail = props.post.thumbnail
+  const baseURL = config.app.baseURL === '/'
+    ? ''
+    : config.app.baseURL.replace(/\/$/, '')
+
+  if (!thumbnail)
+    return undefined
+
+  if (/^(?:[a-z]+:)?\/\//i.test(thumbnail) || thumbnail.startsWith('data:'))
+    return thumbnail
+
+  if (config.app.baseURL !== '/' && thumbnail.startsWith(config.app.baseURL))
+    return thumbnail
+
+  return `${baseURL}${thumbnail.startsWith('/') ? thumbnail : `/${thumbnail}`}`
+})
 </script>
 
 <template>
@@ -42,7 +62,7 @@ const gradientColor = computed(() => {
     <div 
       class="aspect-video overflow-hidden shrink-0 w-full"
     >
-      <img v-if="post.thumbnail" :src="post.thumbnail" :alt="post.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+      <img v-if="thumbnailSrc" :src="thumbnailSrc" :alt="post.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
       <div v-else :class="`w-full h-full bg-gradient-to-br ${gradientColor} flex items-center justify-center transition-colors duration-300`">
         <svg class="w-8 sm:w-12 h-8 sm:h-12 text-blue-400 dark:text-blue-300 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />

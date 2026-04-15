@@ -20,6 +20,26 @@ function formatDate(dateStr: string) {
     year: 'numeric', month: 'long', day: 'numeric',
   })
 }
+
+const config = useRuntimeConfig()
+
+const thumbnailSrc = computed(() => {
+  const thumbnail = post.value?.thumbnail
+  const baseURL = config.app.baseURL === '/'
+    ? ''
+    : config.app.baseURL.replace(/\/$/, '')
+
+  if (!thumbnail)
+    return undefined
+
+  if (/^(?:[a-z]+:)?\/\//i.test(thumbnail) || thumbnail.startsWith('data:'))
+    return thumbnail
+
+  if (config.app.baseURL !== '/' && thumbnail.startsWith(config.app.baseURL))
+    return thumbnail
+
+  return `${baseURL}${thumbnail.startsWith('/') ? thumbnail : `/${thumbnail}`}`
+})
 </script>
 <template>
   <article v-if="post" class="max-w-3xl mx-auto">
@@ -48,7 +68,7 @@ function formatDate(dateStr: string) {
       </div>
 
       <!-- Thumbnail -->
-      <img v-if="post.thumbnail" :src="post.thumbnail" :alt="post.title" class="w-full rounded-2xl object-cover mt-6" />
+      <img v-if="thumbnailSrc" :src="thumbnailSrc" :alt="post.title" class="w-full rounded-2xl object-cover mt-6" />
     </header>
 
     <!-- Content -->
