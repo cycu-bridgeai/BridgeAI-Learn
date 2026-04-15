@@ -23,7 +23,6 @@ function formatDate(dateStr: string) {
   })
 }
 </script>
-
 <template>
   <article v-if="video" class="max-w-3xl mx-auto">
     <NuxtLink to="/videos" class="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-semibold text-xs sm:text-sm rounded-lg hover:shadow-[0_0_15px_rgba(239,68,68,0.4)] hover:scale-105 transition-all duration-300 mb-8">
@@ -54,7 +53,7 @@ function formatDate(dateStr: string) {
     <ContentYoutubeEmbed :id="video.youtubeId" :title="video.title" class="mb-10" />
 
     <!-- Additional content / notes -->
-    <div v-if="video.body" class="prose prose-slate dark:prose-invert prose-lg max-w-none">
+    <div v-if="video.body" class="prose prose-gray dark:prose-invert prose-lg max-w-none dark:text-gray-300">
       <ContentRenderer :value="video" />
     </div>
   </article>
