@@ -21,7 +21,6 @@ function formatDate(dateStr: string) {
   })
 }
 </script>
-
 <template>
   <article v-if="post" class="max-w-3xl mx-auto">
     <NuxtLink to="/blog" class="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-semibold text-xs sm:text-sm rounded-lg hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:scale-105 transition-all duration-300 mb-8">
@@ -47,6 +46,9 @@ function formatDate(dateStr: string) {
           </NuxtLink>
         </div>
       </div>
+
+      <!-- Thumbnail -->
+      <img v-if="post.thumbnail" :src="post.thumbnail" :alt="post.title" class="w-full rounded-2xl object-cover mt-6" />
     </header>
 
     <!-- Content -->
