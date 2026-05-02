@@ -2,13 +2,11 @@
 title: 第一次打開 BridgeAI：它到底能幫課程做什麼？
 description: 從學生練習到老師管理，一次看懂 BridgeAI 在課堂裡的使用方式
 date: 2026-05-02
-thumbnail: /images/BridgeAI_learn_assistant.png
 tags:
-  - bridgeai
+  - BridgeAI
   - teaching
   - ai
 ---
-
 老實說，第一次聽到「AI 教學平台」這幾個字，我腦中浮出的畫面其實有點模糊。
 
 它是拿來聊天的？拿來交作業的？還是老師用來看成績的後台？如果只是把 Moodle、線上評測、AI 助手和測驗全部塞在一起，那學生大概會不知道從哪裡開始，老師也會懷疑自己是不是又多了一個要管理的系統。
