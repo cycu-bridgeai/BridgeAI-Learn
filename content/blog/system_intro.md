@@ -2,6 +2,7 @@
 title: 第一次打開 BridgeAI：它到底能幫課程做什麼？
 description: 從學生練習到老師管理，一次看懂 BridgeAI 在課堂裡的使用方式
 date: 2026-05-02
+thumbnail: /images/system_intro_thumbnail.png
 tags:
   - BridgeAI
   - teaching
