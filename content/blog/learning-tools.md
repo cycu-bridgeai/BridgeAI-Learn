@@ -4,8 +4,8 @@ description: 從學生視角介紹 AI 問答、筆記、快閃卡、全螢幕、
 date: 2026-05-11
 thumbnail: /images/知識點.png
 tags:
-  - 學習工具
-  - 新手指南
+  - learning-tools
+  - guide
 ---
 
 老實說，我第一次打開 BridgeAI 的時候，以為它就是一個比較好看的課程平台。
