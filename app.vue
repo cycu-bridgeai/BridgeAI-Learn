@@ -1,7 +1,8 @@
 <script setup>
+const config = useRuntimeConfig()
 useHead({
   link: [
-    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    { rel: 'icon', type: 'image/x-icon', href: `${config.app.baseURL}favicon.ico` }
   ]
 })
 </script>

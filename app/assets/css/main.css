@@ -5,3 +5,8 @@
 	border-radius: 0 !important;
 	color: inherit !important;
 }
+
+.prose blockquote:has(> p > img:only-child) p::before,
+.prose blockquote:has(> p > img:only-child) p::after {
+	content: '' !important;
+}
