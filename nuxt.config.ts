@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/BridgeAI-Learn/',
   },
+  css: ['~/assets/css/main.css'],
   modules: ['@nuxt/content', '@nuxtjs/tailwindcss'],
   content: {
     watch: {

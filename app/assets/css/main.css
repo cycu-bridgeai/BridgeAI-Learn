@@ -1,0 +1,12 @@
+.prose blockquote:has(> p > img:only-child) {
+	border-left: none !important;
+	background-color: transparent !important;
+	padding: 0 !important;
+	border-radius: 0 !important;
+	color: inherit !important;
+}
+
+.prose blockquote:has(> p > img:only-child) p::before,
+.prose blockquote:has(> p > img:only-child) p::after {
+	content: '' !important;
+}
