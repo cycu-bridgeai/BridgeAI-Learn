@@ -1,3 +1,12 @@
+.prose img {
+	border: 2px solid #111;
+	border-radius: 6px;
+}
+
+.dark .prose img {
+	border-color: #555;
+}
+
 .prose blockquote:has(> p > img:only-child) {
 	border-left: none !important;
 	background-color: transparent !important;
