@@ -71,19 +71,14 @@ export default {
               fontSize: '0.875em',
             },
             blockquote: {
-              borderLeftWidth: '4px',
-              borderLeftColor: '#3b82f6',
-              backgroundColor: '#eff6ff',
-              padding: '1rem 1.5rem',
+              borderLeftWidth: '0',
+              backgroundColor: '#f5f5f5',
+              padding: '0.875rem 1.25rem',
               borderRadius: '0.5rem',
               fontStyle: 'normal',
-              color: '#1e40af',
+              color: 'inherit',
             },
-            '.dark blockquote': {
-              backgroundColor: '#172554',
-              borderLeftColor: '#60a5fa',
-              color: '#dbeafe',
-            },
+
             code: {
               backgroundColor: '#f3f4f6',
               padding: '0.2rem 0.4rem',
@@ -114,6 +109,10 @@ export default {
               backgroundColor: '#374151',
               border: '1px solid #6b7280',
               color: '#e5e7eb',
+            },
+            blockquote: {
+              backgroundColor: '#2a2a2a',
+              color: 'inherit',
             },
           },
         },
