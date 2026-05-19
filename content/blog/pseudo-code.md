@@ -5,6 +5,7 @@ date: 2026-03-20
 thumbnail: /images/BridgeAI_learn_assistant.png
 tags:
   - ai
+  - students
 ---
 
 我常常盯著螢幕發呆。

@@ -6,6 +6,7 @@ thumbnail: /images/知識點.png
 tags:
   - learning-tools
   - guide
+  - students
 ---
 
 老實說，我第一次打開 BridgeAI 的時候，以為它就是一個比較好看的課程平台。
