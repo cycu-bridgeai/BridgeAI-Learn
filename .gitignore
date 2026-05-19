@@ -13,6 +13,7 @@ dist/
 
 # Local development files
 FRONTEND_IMPROVEMENT_PLAN.md
+CLAUDE.md
 
 # IDE
 .vscode/
