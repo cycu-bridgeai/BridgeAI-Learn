@@ -7,6 +7,7 @@ tags:
   - teaching
   - knowledgepoints
   - units
+  - teachers
 ---
 
 BridgeAI 的課程內容以「單元」和「知識點」組織。

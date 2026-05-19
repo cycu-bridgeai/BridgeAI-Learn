@@ -6,6 +6,7 @@ thumbnail: /images/練習場.png
 tags:
   - playground
   - guide
+  - students
 ---
 
 有時候你就是只想試一個想法。
