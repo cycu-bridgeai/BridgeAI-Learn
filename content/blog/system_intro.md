@@ -7,6 +7,8 @@ tags:
   - BridgeAI
   - teaching
   - ai
+  - students
+  - teachers
 ---
 老實說，第一次聽到「AI 教學平台」這幾個字，我腦中浮出的畫面其實有點模糊。
 
