@@ -5,6 +5,8 @@ date: 2026-05-15
 thumbnail: /images/system_intro_thumbnail.png
 tags:
   - intro
+  - teaching
+  - students
   - teachers
 ---
 第一次聽到「AI 教學平台」，很容易先想到一個聊天機器人，或是一個把作業、測驗、評分後台全部堆在一起的新系統。

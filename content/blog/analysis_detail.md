@@ -5,6 +5,7 @@ date: 2026-05-18
 thumbnail: /images/analysis_detail.png
 tags:
   - analytics
+  - teaching
   - teachers
 ---
 BridgeAI 的學習分析不是只在期末產生成績報表，而是讓教師和助教在課程進行中看見學生的學習狀況。
