@@ -43,6 +43,9 @@ function toggleTheme() {
           <NuxtLink to="/videos" class="hidden sm:inline hover:text-blue-600 dark:hover:text-blue-400 transition-colors" active-class="text-blue-600 dark:text-blue-400">
             Videos
           </NuxtLink>
+          <NuxtLink to="/works" class="hidden sm:inline hover:text-blue-600 dark:hover:text-blue-400 transition-colors" active-class="text-blue-600 dark:text-blue-400">
+            Works
+          </NuxtLink>
           <!-- Theme toggle button -->
           <button 
             @click="toggleTheme"
