@@ -12,13 +12,14 @@ const { getContentByTag } = useTags()
 // Query both collections using composable
 const { data: tagContent } = await useAsyncData(`tags-${tag}`, () => getContentByTag(tag))
 
-// Combine blogs and videos, sorted by date DESC
+// Combine blogs, videos and works, sorted by date DESC
 const results = computed(() => {
   if (!tagContent.value) return []
   
   const combined = [
     ...tagContent.value.blogs.map(b => ({ ...b, type: 'blog' })),
-    ...tagContent.value.videos.map(v => ({ ...v, type: 'video' }))
+    ...tagContent.value.videos.map(v => ({ ...v, type: 'video' })),
+    ...tagContent.value.works.map(w => ({ ...w, type: 'work' }))
   ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
   return combined
@@ -36,12 +37,13 @@ const results = computed(() => {
         <span class="text-blue-600">#</span> {{ tag }}
       </h1>
     <p class="text-gray-500 dark:text-gray-400 mt-2 mb-10">
-      Showing all articles and videos tagged with "{{ tag }}".
+      Showing all articles, videos, and student works tagged with "{{ tag }}".
     </p>
 
     <div v-if="results.length" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <template v-for="item in results" :key="item.path">
         <PostCard v-if="item.type === 'blog'" :post="item as any" />
+        <WorkCard v-else-if="item.type === 'work'" :work="item as any" />
         <VideoCard v-else :video="item as any" />
       </template>
     </div>
