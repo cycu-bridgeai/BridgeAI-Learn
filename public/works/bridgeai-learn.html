@@ -1,0 +1,311 @@
+<h1 dir="auto">🚀 BridgeAI Learn</h1>
+<p dir="auto">一個現代化的 AI 學習平台，提供精選的部落格文章和 YouTube 教學影片，幫助開發者系統性地學習 AI 和機器學習概念。123</p>
+<h2 dir="auto">🌐 線上訪問</h2>
+<ul dir="auto">
+<li><strong>主站</strong>：<a href="https://cycu-bridgeai.github.io/BridgeAI-Learn/" rel="nofollow">BridgeAI Learn</a></li>
+<li><strong>開發環境</strong>：<code class="notranslate">http://localhost:3011/BridgeAI-Learn/</code></li>
+<li><strong>自動部署</strong>：GitHub Actions (推送到 main 時自動部署)</li>
+</ul>
+<hr>
+<h2 dir="auto">📋 功能特性</h2>
+<h3 dir="auto">✨ 核心功能</h3>
+<ul dir="auto">
+<li>📝 <strong>部落格系統</strong>：AI 學習教程和深度解析</li>
+<li>🎬 <strong>影片集合</strong>：精選 YouTube 教學影片</li>
+<li>🌓 <strong>暗黑模式</strong>：全站支持亮色/暗黑切換 (系統偏好 + 手動切換)</li>
+<li>📱 <strong>響應式設計</strong>：完美適配手機、平板、桌面</li>
+<li>⚡ <strong>快速性能</strong>：Nuxt 4 + Vite + Tailwind CSS</li>
+</ul>
+<h3 dir="auto">🎨 UI/UX 特色</h3>
+<ul dir="auto">
+<li>動態卡片設計（部落格藍色系、影片紅色系）</li>
+<li>彩色漸變背景（無縮圖卡片自動生成）</li>
+<li>流暢的頁面動畫和過渡效果</li>
+<li>優化的排版和易讀的字體設定</li>
+</ul>
+<hr>
+<h2 dir="auto">📁 項目結構</h2>
+<pre class="notranslate"><code class="notranslate">BridgeAI-Learn/
+├── app/
+│   ├── components/              # 可重用組件
+│   │   ├── PostCard.vue         # 部落格卡片
+│   │   ├── VideoCard.vue        # 影片卡片
+│   │   └── content/
+│   │       └── YoutubeEmbed.vue  # YouTube 嵌入播放器
+│   ├── layouts/
+│   │   └── default.vue          # 全域佈局（導航 + 頁腳）
+│   └── pages/
+│       ├── index.vue            # 首頁
+│       ├── blog/
+│       │   ├── index.vue        # 部落格列表
+│       │   └── [...slug].vue    # 部落格詳細頁
+│       └── videos/
+│           ├── index.vue        # 影片列表
+│           └── [...slug].vue    # 影片詳細頁
+├── content/
+│   ├── blog/                    # 部落格 Markdown 檔案
+│   │   └── pseudo-code.md
+│   └── videos/                  # 影片 Markdown 檔案
+│       └── intro-neural-networks.md
+├── public/                      # 靜態資源
+├── tailwind.config.ts           # Tailwind 配置
+├── nuxt.config.ts              # Nuxt 配置
+├── tsconfig.json               # TypeScript 配置
+└── package.json                # 依賴管理
+</code></pre>
+<hr>
+<h2 dir="auto">🛣️ 路由結構</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>頁面</th>
+<th>路由</th>
+<th>檔案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>首頁</strong></td>
+<td><code class="notranslate">/</code></td>
+<td><code class="notranslate">app/pages/index.vue</code></td>
+</tr>
+<tr>
+<td><strong>部落格列表</strong></td>
+<td><code class="notranslate">/blog</code></td>
+<td><code class="notranslate">app/pages/blog/index.vue</code></td>
+</tr>
+<tr>
+<td><strong>部落格詳細</strong></td>
+<td><code class="notranslate">/blog/[文章]</code></td>
+<td><code class="notranslate">app/pages/blog/[...slug].vue</code></td>
+</tr>
+<tr>
+<td><strong>影片列表</strong></td>
+<td><code class="notranslate">/videos</code></td>
+<td><code class="notranslate">app/pages/videos/index.vue</code></td>
+</tr>
+<tr>
+<td><strong>影片詳細</strong></td>
+<td><code class="notranslate">/videos/[影片]</code></td>
+<td><code class="notranslate">app/pages/videos/[...slug].vue</code></td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h2 dir="auto">🚀 快速開始</h2>
+<h3 dir="auto">環境要求</h3>
+<ul dir="auto">
+<li><strong>Node.js</strong>：≥ 18.0</li>
+<li><strong>pnpm</strong>：≥ 8.0（推薦）或 npm/yarn</li>
+</ul>
+<h3 dir="auto">安裝依賴</h3>
+<div class="highlight highlight-source-shell" dir="auto"><pre class="notranslate">pnpm install</pre></div>
+<h3 dir="auto">啟動開發伺服器</h3>
+<div class="highlight highlight-source-shell" dir="auto"><pre class="notranslate">pnpm dev</pre></div>
+<p dir="auto">訪問 <code class="notranslate">http://localhost:3011/BridgeAI-Learn/</code></p>
+<h3 dir="auto">構建生產版本</h3>
+<div class="highlight highlight-source-shell" dir="auto"><pre class="notranslate">pnpm build</pre></div>
+<h3 dir="auto">預覽生產版本</h3>
+<div class="highlight highlight-source-shell" dir="auto"><pre class="notranslate">pnpm preview</pre></div>
+<hr>
+<h2 dir="auto">📝 新增內容指南</h2>
+<h3 dir="auto">新增部落格文章</h3>
+<ol dir="auto">
+<li>
+<p dir="auto"><strong>建立檔案</strong></p>
+<div class="highlight highlight-source-shell" dir="auto"><pre class="notranslate">content/blog/[你的檔案名].md</pre></div>
+</li>
+<li>
+<p dir="auto"><strong>填寫內容</strong> (使用此模板)</p>
+<div class="highlight highlight-text-md" dir="auto"><pre class="notranslate"><span class="pl-s">---</span>
+<span class="pl-ent">title</span>: <span class="pl-s">文章標題</span>
+<span class="pl-ent">description</span>: <span class="pl-s">一句話簡介（顯示在卡片上）</span>
+<span class="pl-ent">date</span>: <span class="pl-c1">2026-03-30</span>
+<span class="pl-ent">tags</span>:
+  - <span class="pl-s">tag1</span>
+  - <span class="pl-s">tag2</span>
+<span class="pl-ent">thumbnail</span>: <span class="pl-s">https://example.com/image.jpg  </span><span class="pl-c"><span class="pl-c">#</span> 可選</span>
+<span class="pl-s">---</span>
+
+<span class="pl-mh"># <span class="pl-en">你的文章內容</span></span>
+
+Markdown 格式的完整文章...</pre></div>
+</li>
+<li>
+<p dir="auto"><strong>自動更新</strong></p>
+<ul dir="auto">
+<li>儲存檔案後，開發伺服器會自動偵測</li>
+<li>自動出現在 <code class="notranslate">/blog</code> 列表頁</li>
+<li>自動建立 <code class="notranslate">/blog/[你的檔案名]</code> 詳細頁</li>
+</ul>
+</li>
+</ol>
+<h3 dir="auto">新增影片</h3>
+<ol dir="auto">
+<li>
+<p dir="auto"><strong>建立檔案</strong></p>
+<div class="highlight highlight-source-shell" dir="auto"><pre class="notranslate">content/videos/[你的檔案名].md</pre></div>
+</li>
+<li>
+<p dir="auto"><strong>填寫內容</strong> (使用此模板)</p>
+<div class="highlight highlight-text-md" dir="auto"><pre class="notranslate"><span class="pl-s">---</span>
+<span class="pl-ent">title</span>: <span class="pl-s">影片標題</span>
+<span class="pl-ent">description</span>: <span class="pl-s">影片簡介</span>
+<span class="pl-ent">date</span>: <span class="pl-c1">2026-03-30</span>
+<span class="pl-ent">youtubeId</span>: <span class="pl-s">[YouTube 影片 ID]</span>
+<span class="pl-ent">tags</span>:
+  - <span class="pl-s">tag1</span>
+  - <span class="pl-s">tag2</span>
+<span class="pl-s">---</span>
+
+<span class="pl-mh">## <span class="pl-en">關於此影片</span></span>
+
+影片說明和重點...
+
+<span class="pl-mh">## <span class="pl-en">你將學到什麼</span></span>
+
+<span class="pl-v">-</span> 重點 1
+<span class="pl-v">-</span> 重點 2</pre></div>
+</li>
+<li>
+<p dir="auto"><strong>取得 YouTube ID</strong></p>
+<ul dir="auto">
+<li>影片 URL：<code class="notranslate">https://www.youtube.com/watch?v=aircAruvnKk</code></li>
+<li>YouTube ID：<code class="notranslate">aircAruvnKk</code> (watch?v= 後面)</li>
+</ul>
+</li>
+</ol>
+<h3 dir="auto">Front Matter 欄位說明</h3>
+<h4 dir="auto">共通欄位</h4>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">title</code></td>
+<td>String</td>
+<td>✅</td>
+<td>顯示在卡片和詳細頁</td>
+</tr>
+<tr>
+<td><code class="notranslate">description</code></td>
+<td>String</td>
+<td>✅</td>
+<td>顯示在卡片下方</td>
+</tr>
+<tr>
+<td><code class="notranslate">date</code></td>
+<td>Date</td>
+<td>✅</td>
+<td>排序和日期顯示 (YYYY-MM-DD)</td>
+</tr>
+<tr>
+<td><code class="notranslate">tags</code></td>
+<td>Array</td>
+<td>✅</td>
+<td>內容分類</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h4 dir="auto">部落格特有</h4>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">thumbnail</code></td>
+<td>String</td>
+<td>❌</td>
+<td>卡片封面圖片 URL</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h4 dir="auto">影片特有</h4>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">youtubeId</code></td>
+<td>String</td>
+<td>✅</td>
+<td>YouTube 影片 ID</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h2 dir="auto">🎨 暗黑模式</h2>
+<h3 dir="auto">功能</h3>
+<ul dir="auto">
+<li>✅ 全站支持亮色/暗黑切換</li>
+<li>✅ 按鈕位置：導航欄右上角（太陽/月亮圖標）</li>
+<li>✅ 自動檢測系統偏好設定</li>
+<li>✅ 選擇儲存到 localStorage</li>
+</ul>
+<h3 dir="auto">技術棧</h3>
+<ul dir="auto">
+<li><strong>Tailwind CSS</strong>: <code class="notranslate">darkMode: 'class'</code></li>
+<li><strong>控制中心</strong>: <code class="notranslate">app/layouts/default.vue</code></li>
+<li><strong>所有頁面和組件</strong>都有 <code class="notranslate">dark:</code> 類別支持</li>
+</ul>
+<hr>
+<h2 dir="auto">🛠️ 技術棧</h2>
+<ul dir="auto">
+<li><strong>框架</strong>: Nuxt 4.4.2 + Vue 3.5.31</li>
+<li><strong>CSS</strong>: Tailwind CSS 3</li>
+<li><strong>內容管理</strong>: Nuxt Content (Markdown)</li>
+<li><strong>開發工具</strong>: Vite, TypeScript</li>
+<li><strong>套件管理</strong>: pnpm</li>
+</ul>
+<hr>
+<h2 dir="auto">📦 主要依賴</h2>
+<div class="highlight highlight-source-json" dir="auto"><pre class="notranslate">{
+  <span class="pl-ent">"dependencies"</span>: {
+    <span class="pl-ent">"nuxt"</span>: <span class="pl-s"><span class="pl-pds">"</span>^4.4.2<span class="pl-pds">"</span></span>,
+    <span class="pl-ent">"vue"</span>: <span class="pl-s"><span class="pl-pds">"</span>^3.5.31<span class="pl-pds">"</span></span>,
+    <span class="pl-ent">"@nuxt/content"</span>: <span class="pl-s"><span class="pl-pds">"</span>^2.13.0<span class="pl-pds">"</span></span>
+  },
+  <span class="pl-ent">"devDependencies"</span>: {
+    <span class="pl-ent">"tailwindcss"</span>: <span class="pl-s"><span class="pl-pds">"</span>^3.4.3<span class="pl-pds">"</span></span>,
+    <span class="pl-ent">"typescript"</span>: <span class="pl-s"><span class="pl-pds">"</span>^5<span class="pl-pds">"</span></span>
+  }
+}</pre></div>
+<hr>
+<h2 dir="auto">📚 部落格內容建議</h2>
+<p dir="auto">推薦涵蓋的主題：</p>
+<ul dir="auto">
+<li>AI/ML 基礎概念</li>
+<li>深度學習算法詳解</li>
+<li>實戰項目教程</li>
+<li>工具和框架使用指南</li>
+<li>最佳實踐和技巧</li>
+</ul>
+<hr>
+<h2 dir="auto">🎓 學習資源</h2>
+<ul dir="auto">
+<li><a href="https://nuxt.com" rel="nofollow">Nuxt Documentation</a></li>
+<li><a href="https://vuejs.org" rel="nofollow">Vue 3 Guide</a></li>
+<li><a href="https://tailwindcss.com" rel="nofollow">Tailwind CSS</a></li>
+<li><a href="https://content.nuxt.com" rel="nofollow">Nuxt Content</a></li>
+</ul>
+<hr>
+<h2 dir="auto">聯繫方式</h2>
+<p dir="auto">有問題或建議？歡迎提交 Issue 或 Pull Request！</p>
