@@ -10,5 +10,5 @@ tags:
   - nuxt
   - vue
   - students
-githubSha: "dd0a598aaf373e8bc4a558f0a9a25cb3abb2cbc8"
+githubSha: "b8cb240655579bb216aac823fdbe198b38c14747"
 ---
