@@ -55,21 +55,27 @@ const { data: latestWorks } = await useAsyncData('home-works', () =>
           Tutorials, articles, and videos on AI concepts and practical learning.
         </p>
 
-        <!-- Animated Buttons -->
-        <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 animate-fadeInUp animation-delay-400">
-          <NuxtLink 
-            to="/blog" 
-            class="px-6 sm:px-8 py-2.5 sm:py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-700 dark:to-blue-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300 active:scale-95 dark:hover:from-blue-600 dark:hover:to-blue-700 text-sm sm:text-base"
-          >
-            Read Blog
-          </NuxtLink>
-          <NuxtLink 
-            to="/videos" 
-            class="px-6 sm:px-8 py-2.5 sm:py-3.5 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold rounded-lg border-2 border-gray-300 dark:border-gray-600 shadow-sm hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:scale-105 hover:border-gray-400 dark:hover:border-gray-500 transition-all duration-300 active:scale-95 text-sm sm:text-base"
-          >
-            Watch Videos
-          </NuxtLink>
-        </div>
+		<!-- Animated Buttons -->
+		<div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 animate-fadeInUp animation-delay-400">
+			<NuxtLink 
+				to="/blog" 
+				class="px-6 sm:px-8 py-2.5 sm:py-3.5 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold rounded-lg border-2 border-gray-300 dark:border-gray-600 shadow-sm hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:scale-105 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 active:scale-95 text-sm sm:text-base"
+			>
+				Read Blog
+			</NuxtLink>
+			<NuxtLink 
+				to="/videos" 
+				class="px-6 sm:px-8 py-2.5 sm:py-3.5 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold rounded-lg border-2 border-gray-300 dark:border-gray-600 shadow-sm hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:scale-105 hover:border-red-400 dark:hover:border-red-500 transition-all duration-300 active:scale-95 text-sm sm:text-base"
+			>
+				Watch Videos
+			</NuxtLink>
+			<NuxtLink 
+				to="/works" 
+				class="px-6 sm:px-8 py-2.5 sm:py-3.5 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold rounded-lg border-2 border-gray-300 dark:border-gray-600 shadow-sm hover:shadow-[0_0_20px_rgba(147,51,234,0.4)] hover:scale-105 hover:border-purple-400 dark:hover:border-purple-500 transition-all duration-300 active:scale-95 text-sm sm:text-base"
+			>
+				View Works
+			</NuxtLink>
+		</div>
       </div>
 
       <!-- Decorative bottom line with subtle animation -->

@@ -1,0 +1,44 @@
+name: Scheduled README Sync
+
+on:
+  schedule:
+    # 每天 UTC 19:00 (台灣時間凌晨 03:00) 執行一次
+    - cron: '0 19 * * *'
+  workflow_dispatch: # 支援在 Actions 頁面手動觸發
+
+permissions:
+  contents: write # 確保 action 具有寫入/推送權限
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Run Sync Script
+        run: node scripts/pre-fetch-all.js --update
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FORCE_UPDATE: 'true'
+
+      - name: Commit and Push changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add content/works/
+          # 檢查是否有檔案變更，若有則提交並推送到 main，觸發部署
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-update works READMEs" && git push origin main)

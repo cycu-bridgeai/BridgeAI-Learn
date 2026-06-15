@@ -69,10 +69,11 @@ async function preFetchAll() {
 
 		const githubUrl = urlMatch[1].trim()
 
-		// Checking if body exists
-		// We only fetch if the body is empty (e.g. only frontmatter was written by the user)
-		if (bodyText !== '') {
-			// Skip fetching if body is already populated to avoid overwriting user edits
+		// 檢查是否啟用強制更新模式 (支援環境變數與參數)
+		const forceUpdate = process.env.FORCE_UPDATE === 'true' || process.argv.includes('--update') || process.argv.includes('-u')
+
+		// 若已有內文且非強制更新，則跳過
+		if (bodyText !== '' && !forceUpdate) {
 			continue
 		}
 
@@ -111,11 +112,67 @@ async function preFetchAll() {
 					readmeContent = readmeData.content || ''
 				}
 
-				// Write back to the markdown file, maintaining original frontmatter
-				const updatedContent = `---\n${frontmatterText}\n---\n\n${readmeContent.trim()}`
+				const liveSha = readmeData.sha || ''
+
+				// 調用 GitHub Markdown API 來取得渲染後的 HTML
+				const markdownRes = await fetch('https://api.github.com/markdown', {
+					method: 'POST',
+					headers: {
+						...headers,
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						text: readmeContent,
+						mode: 'gfm',
+						context: `${owner}/${repo}`
+					})
+				})
+
+				if (!markdownRes.ok) {
+					console.log(`${colors.red}✖ 轉譯 Markdown 失敗 (${markdownRes.status})${colors.reset}`)
+					continue
+				}
+
+				const readmeHtml = await markdownRes.text()
+
+				// 確保 public/works 目錄存在
+				const publicWorksDir = path.join(__dirname, '../public/works')
+				if (!fs.existsSync(publicWorksDir)) {
+					fs.mkdirSync(publicWorksDir, { recursive: true })
+				}
+
+				const htmlFilePath = path.join(publicWorksDir, file.replace(/\.md$/, '.html'))
+				let localHtml = ''
+				if (fs.existsSync(htmlFilePath)) {
+					localHtml = fs.readFileSync(htmlFilePath, 'utf-8')
+				}
+
+				// 比對 HTML 與 SHA，若都一致則跳過
+				const hasSha = frontmatterText.includes(`githubSha: "${liveSha}"`)
+				if (hasSha && localHtml.trim() === readmeHtml.trim() && bodyText.trim() === '') {
+					console.log(`${colors.green}✔ [${file}] 內容與 HTML 一致，跳過更新。${colors.reset}`)
+					continue
+				}
+
+				// 移除舊的 readmeLength 欄位，並寫入/更新 githubSha
+				let finalFrontmatter = frontmatterText
+					.replace(/readmeLength:\s*\d+\r?\n?/, '') // 移除舊的字數紀錄
+					.trim()
+
+				if (!finalFrontmatter.includes('githubSha:')) {
+					finalFrontmatter = `${finalFrontmatter}\ngithubSha: "${liveSha}"`
+				} else {
+					finalFrontmatter = finalFrontmatter.replace(/githubSha:\s*["']?[a-zA-Z0-9]+["']?/, `githubSha: "${liveSha}"`)
+				}
+
+				// 1. 寫回 md 檔案，但正文部分留空
+				const updatedContent = `---\n${finalFrontmatter}\n---`
 				fs.writeFileSync(filePath, updatedContent, 'utf-8')
+
+				// 2. 寫入 HTML 到 public 目錄
+				fs.writeFileSync(htmlFilePath, readmeHtml.trim(), 'utf-8')
 				
-				console.log(`${colors.green}✔ [${file}] 成功自動抓取並填入 README！${colors.reset}`)
+				console.log(`${colors.green}✔ [${file}] 成功抓取，HTML 與設定檔已分離寫入！ (SHA: ${liveSha})${colors.reset}`)
 			} else {
 				console.log(`${colors.red}✖ 抓取失敗 (${readmeRes.status})。請確認 repo 是否為公開、或 URL 是否正確。${colors.reset}`)
 			}

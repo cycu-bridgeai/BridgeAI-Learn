@@ -41,3 +41,34 @@
 .prose blockquote:has(> p > img:only-child) p::after {
 	content: '' !important;
 }
+
+/* 讓 markdown 表格擁有清晰格線與斑馬紋 */
+.prose table {
+	border-collapse: collapse;
+	border: 1px solid #e2e8f0;
+	width: 100%;
+}
+.dark .prose table {
+	border-color: #374151;
+}
+.prose th, .prose td {
+	border: 1px solid #e2e8f0 !important;
+	padding: 0.625rem 0.875rem !important;
+	font-size: 0.875rem;
+}
+.dark .prose th, .dark .prose td {
+	border-color: #374151 !important;
+}
+.prose th {
+	background-color: #f8fafc;
+	font-weight: 700;
+}
+.dark .prose th {
+	background-color: #1f2937;
+}
+.prose tr:nth-child(even) {
+	background-color: #f8fafc;
+}
+.dark .prose tr:nth-child(even) {
+	background-color: rgba(31, 41, 55, 0.4);
+}

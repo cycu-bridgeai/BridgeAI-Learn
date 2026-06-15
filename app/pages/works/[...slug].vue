@@ -23,6 +23,22 @@ function formatDate(dateStr: string) {
 
 const config = useRuntimeConfig()
 
+// 取得本地已預先抓取並編譯好的 HTML 內容
+const { data: localHtml } = await useAsyncData(`work-html-${slug}`, async () => {
+	if (import.meta.server) {
+		try {
+			const fs = await import('node:fs/promises')
+			const path = await import('node:path')
+			const filePath = path.join(process.cwd(), 'public', 'works', `${slug}.html`)
+			return await fs.readFile(filePath, 'utf-8')
+		} catch (err) {
+			console.error(`[SSR] 讀取本地 HTML 檔案失敗 (${slug}):`, err)
+		}
+	}
+	const baseURL = config.app.baseURL === '/' ? '' : config.app.baseURL.replace(/\/$/, '')
+	return $fetch<string>(`${baseURL}/works/${slug}.html`)
+})
+
 const thumbnailSrc = computed(() => {
   const thumbnail = work.value?.thumbnail
   const baseURL = config.app.baseURL === '/'
@@ -50,6 +66,164 @@ type TocLink = {
 const tocLinks = computed<TocLink[]>(() => {
   const body = work.value?.body as { toc?: { links?: TocLink[] } } | undefined
   return body?.toc?.links ?? []
+})
+
+const hasUpdate = ref(false)
+const isUpdating = ref(false)
+const latestHtml = ref('')
+const latestReadmeContent = ref('')
+const errorMessage = ref('')
+
+const githubInfo = computed(() => {
+  const url = work.value?.githubUrl
+  if (!url) return null
+  const cleanedUrl = url.replace(/(\.git)$/, '')
+  const parts = cleanedUrl.split('github.com/')
+  if (parts.length < 2) return null
+  const repoParts = parts[1].split('/')
+  return {
+    owner: repoParts[0],
+    repo: repoParts[1]
+  }
+})
+
+// 將 HTML 中的相對路徑轉換為 GitHub 上的絕對路徑，解決破圖問題
+const formatHtmlContent = (html: string) => {
+	if (!html || !githubInfo.value) return html
+	const { owner, repo } = githubInfo.value
+	const githubRawBase = `https://raw.githubusercontent.com/${owner}/${repo}/main`
+	const githubHtmlBase = `https://github.com/${owner}/${repo}/blob/main`
+
+	// 1. 替換相對圖片 src (排除以 http/https/data:/ 開頭的絕對路徑)
+	let formatted = html.replace(/(src=")(?!https?:\/\/|data:|\/)([^"]+)(")/g, (match, p1, p2, p3) => {
+		return `${p1}${githubRawBase}/${p2}${p3}`
+	})
+
+	// 2. 替換相對連結 href (排除以 http/https/#/ 開頭的連結或錨點)
+	formatted = formatted.replace(/(href=")(?!https?:\/\/|#|\/)([^"]+)(")/g, (match, p1, p2, p3) => {
+		const isImage = /\.(png|jpe?g|gif|svg|webp)$/i.test(p2)
+		const base = isImage ? githubRawBase : githubHtmlBase
+		return `${p1}${base}/${p2}${p3}`
+	})
+
+	return formatted
+}
+
+const checkGitHubUpdate = async () => {
+  if (!githubInfo.value) return
+  try {
+    const { owner, repo } = githubInfo.value
+    
+    // 取得 GitHub API 的 README 資訊
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/readme`, {
+      headers: {
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    })
+    
+    if (res.ok) {
+      const data = await res.json()
+      const liveSha = data.sha
+      const localSha = work.value?.githubSha
+      
+      // 比對 SHA，若不同則提示有更新
+      if (localSha && liveSha !== localSha) {
+        hasUpdate.value = true
+        
+        // 安全地將 base64 解碼為 UTF-8 中文字串
+        if (data.encoding === 'base64' && data.content) {
+          const binString = atob(data.content.replace(/\s/g, ''))
+          const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0)!)
+          latestReadmeContent.value = new TextDecoder().decode(bytes)
+        }
+      }
+    }
+  } catch (err) {
+    console.error('Error checking GitHub README update:', err)
+  }
+}
+
+const loadLatestContent = async () => {
+  if (!latestReadmeContent.value || isUpdating.value) return
+  isUpdating.value = true
+  errorMessage.value = ''
+  
+  try {
+    const res = await fetch('https://api.github.com/markdown', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        text: latestReadmeContent.value,
+        mode: 'gfm',
+        context: githubInfo.value ? `${githubInfo.value.owner}/${githubInfo.value.repo}` : undefined
+      })
+    })
+    
+    if (res.ok) {
+      const html = await res.text()
+      latestHtml.value = html
+      hasUpdate.value = false
+    } else {
+      throw new Error(`GitHub API returned status ${res.status}`)
+    }
+  } catch (err: any) {
+    console.error('Failed to parse markdown via GitHub API:', err)
+    errorMessage.value = '無法將最新 README 編譯成 HTML，可能發送頻率已超載，請稍後再試。'
+  } finally {
+    isUpdating.value = false
+  }
+}
+
+// 動態載入 KaTeX 資源，實作 LaTeX 數學公式渲染
+useHead({
+  link: [
+    {
+      rel: 'stylesheet',
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css'
+    }
+  ],
+  script: [
+    {
+      src: 'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js',
+      defer: true
+    },
+    {
+      src: 'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js',
+      defer: true,
+      onload: () => {
+        renderMath()
+      }
+    }
+  ]
+})
+
+const renderMath = () => {
+  if (typeof window !== 'undefined' && (window as any).renderMathInElement) {
+    (window as any).renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false},
+        {left: '\\(', right: '\\)', display: false},
+        {left: '\\[', right: '\\[', display: true}
+      ],
+      throwOnError: false
+    })
+  }
+}
+
+// 當 HTML 內容變更時，自動重新渲染公式
+watch([localHtml, latestHtml], () => {
+  nextTick(() => {
+    renderMath()
+  })
+})
+
+onMounted(() => {
+  checkGitHubUpdate()
+  // 稍微延遲以確保 KaTeX 腳本完全載入
+  setTimeout(renderMath, 600)
 })
 </script>
 
@@ -134,10 +308,63 @@ const tocLinks = computed<TocLink[]>(() => {
             <Sidebar :links="tocLinks" title="" class="mt-3" />
           </details>
 
-          <img v-if="thumbnailSrc" :src="thumbnailSrc" :alt="work.work" class="w-full rounded-2xl object-cover mt-6" />
+          <img v-if="thumbnailSrc" :src="thumbnailSrc" :alt="work.title" class="w-full rounded-2xl object-cover mt-6" />
         </header>
 
-        <div class="prose prose-gray dark:prose-invert prose-lg max-w-none dark:text-gray-300">
+        <!-- Dynamic Update Notification Banner -->
+        <div 
+          v-if="hasUpdate || isUpdating || errorMessage" 
+          class="mb-8 p-4 rounded-xl border transition-all duration-300 shadow-sm"
+          :class="[
+            errorMessage 
+              ? 'bg-rose-50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-900/50 text-rose-800 dark:text-rose-200' 
+              : 'bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900/50 text-amber-800 dark:text-amber-200'
+          ]"
+        >
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div 
+                class="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+                :class="[errorMessage ? 'bg-rose-100 dark:bg-rose-900/40' : 'bg-amber-100 dark:bg-amber-900/40']"
+              >
+                <span v-if="isUpdating" class="animate-spin text-amber-600 dark:text-amber-400">🌀</span>
+                <span v-else-if="errorMessage" class="text-rose-500">⚠️</span>
+                <span v-else class="animate-pulse">💡</span>
+              </div>
+							<div>
+								<p class="text-sm font-semibold">
+									<span v-if="isUpdating">正在取得最新內容...</span>
+									<span v-else-if="errorMessage">{{ errorMessage }}</span>
+									<span v-else>本作品已在 GitHub 上更新！</span>
+								</p>
+								<p class="text-xs opacity-80 mt-0.5">
+									<span v-if="isUpdating">取得完成後將自動更新頁面內容。</span>
+									<span v-else-if="errorMessage">您可以稍後再試，或繼續閱讀目前的版本。</span>
+									<span v-else>您可以點擊按鈕，直接在此頁面閱讀最新版說明。</span>
+								</p>
+							</div>
+						</div>
+						<div v-if="!isUpdating" class="flex gap-2 shrink-0 self-end sm:self-auto">
+							<button
+								v-if="hasUpdate"
+								@click="loadLatestContent"
+								class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-lg shadow transition-all active:scale-95 shrink-0"
+							>
+								閱讀新版
+							</button>
+							<button 
+								@click="hasUpdate = false; errorMessage = ''" 
+								class="px-2.5 py-1.5 bg-transparent hover:bg-black/5 dark:hover:bg-white/5 border border-black/10 dark:border-white/10 text-xs font-medium rounded-lg shrink-0"
+							>
+								暫時不用
+							</button>
+						</div>
+          </div>
+        </div>
+
+        <div v-if="latestHtml" class="prose prose-gray dark:prose-invert prose-lg max-w-none dark:text-gray-300" v-html="formatHtmlContent(latestHtml)" />
+        <div v-else-if="localHtml" class="prose prose-gray dark:prose-invert prose-lg max-w-none dark:text-gray-300" v-html="formatHtmlContent(localHtml)" />
+        <div v-else class="prose prose-gray dark:prose-invert prose-lg max-w-none dark:text-gray-300">
           <ContentRenderer :value="work" />
         </div>
       </main>
