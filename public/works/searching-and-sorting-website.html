@@ -41,10 +41,10 @@
     <span class="pl-c1">swap</span>(arr[i], arr[minIndex]);
 }</pre></div>
 <p dir="auto">上面是基於C++的select sort範例，我們假設有資料n筆，當層迴圈i=0時，則未排序區(內層)需要比較資料n-1次(此時第一筆index作為基準，比較量是一對一)，當i=2(也就是第二次搜尋)將需要比較資料n-2次...依此類推，將所有可能的比較全部加在一起。</p>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$T(n) = (n-1)+(n-2)+...+2+1 = n(n-1)/2 $</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$T(n) = (n-1)+(n-2)+...+2+1 = n(n-1)/2 $</math-renderer></p>
 <p dir="auto">將其展開</p>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$T(n) = 1/2 n^2 - 1/2 n$</math-renderer></p>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$deg(T(n)) = 2$</math-renderer> ， <math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$big O(n^2)$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$T(n) = 1/2 n^2 - 1/2 n$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$deg(T(n)) = 2$</math-renderer> ， <math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$big O(n^2)$</math-renderer></p>
 <p dir="auto">在此分析中，其最佳或是最差的情況，都需要使用$ O(n^2)$的時間複雜度來處理任意的排序，因為無論資料量大小，它都需要處裡資料量約$ n^2$次的搜尋。</p>
 <p dir="auto">而它的空間複雜度因為不需要使用額外配置的變數，所以其輔助空間複雜度O(1)。</p>
 <hr>
@@ -68,12 +68,12 @@
         <span class="pl-k">break</span>;
     }
 }</pre></div>
-<p dir="auto">我們先來預想最佳的情況:如果陣列一開始就已經完全排好，則我只需要花費一輪的時間，把整個全部n筆資料全部一對一的比較過，然後會發現沒有swap(不需要排序了)則會退出，所以在這個情況下，給定資料量n，整筆演算法所需要花費的走訪是n-1次，所以取degree就是 <math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$O(n)$</math-renderer>。<br>
+<p dir="auto">我們先來預想最佳的情況:如果陣列一開始就已經完全排好，則我只需要花費一輪的時間，把整個全部n筆資料全部一對一的比較過，然後會發現沒有swap(不需要排序了)則會退出，所以在這個情況下，給定資料量n，整筆演算法所需要花費的走訪是n-1次，所以取degree就是 <math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$O(n)$</math-renderer>。<br>
 若討論到最差的情況:如果一個陣列完全反向排列(由大到小排列)時，則每一次都需要進行交換，且永遠不會提早結束。若給定資料量n，則它需要與選擇排序法相同的時間:<br>
-<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$T(n) = (n-1)+(n-2)+...+2+1 = n(n-1)/2 $</math-renderer></p>
+<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$T(n) = (n-1)+(n-2)+...+2+1 = n(n-1)/2 $</math-renderer></p>
 <p dir="auto">將其展開</p>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$T(n) = 1/2 n^2 - 1/2 n$</math-renderer></p>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$deg(T(n)) = 2$</math-renderer> ， <math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$big O(n^2)$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$T(n) = 1/2 n^2 - 1/2 n$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$deg(T(n)) = 2$</math-renderer> ， <math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$big O(n^2)$</math-renderer></p>
 <p dir="auto">所以其最佳的時間複雜度為$ O(n)$，最差為$ O(n^2)$。</p>
 <p dir="auto">而論其空間複雜度，因為與選擇排序相同，故只需要O(1)的空間複雜度。</p>
 <hr>
@@ -97,7 +97,7 @@
 <p dir="auto">不過這個演算法同氣泡排序法，有退出(break)條件，所以依樣有最佳狀況與最差狀況。</p>
 <p dir="auto">最佳情況下，當陣列一開始就是完全排序狀態(由小到大)，對於整個演算法來說，我只需要讓目標元素走訪所有的資料n即可，也就是比較n-1次。所以時間複雜度為$O(n)$。<br>
 最差情況，當陣列完全反向排序，每次目標元素必須要掃描全部的已排序區域，才會在最開頭插入，也就是當我的i=1時，需要搬動一次，i=2時需要搬動兩次...依此類推，i=n-1時需要n-1次。總合為:</p>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$T(n) = 1 + 2 + 3+...+(n-1)=n(n-1)/2$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$T(n) = 1 + 2 + 3+...+(n-1)=n(n-1)/2$</math-renderer></p>
 <p dir="auto">展開後</p>
 <p dir="auto">$ deg(T(n)) = 2 $ ，時間複雜度$O(n^2)$</p>
 <p dir="auto">而此排序法依然無額外空間需求，所以空間複雜度依然為$O(1)$</p>
@@ -309,19 +309,19 @@
 <p dir="auto">分析程式碼請見complexity test/sort_complexity_visualizer.cpp</p>
 <blockquote>
 <p dir="auto">測資大小n<br>
-<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_1 = 100$</math-renderer><br>
-<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_2 = 500$</math-renderer><br>
-<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_3 = 1000$</math-renderer><br>
-<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_4 = 5000$</math-renderer><br>
-<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_5 = 10000$</math-renderer><br>
-<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_6 = 20000$</math-renderer><br>
-<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_7 = 30000$</math-renderer><br>
-<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_8 = 40000$</math-renderer><br>
-<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_9 = 50000$</math-renderer></p>
+<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_1 = 100$</math-renderer><br>
+<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_2 = 500$</math-renderer><br>
+<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_3 = 1000$</math-renderer><br>
+<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_4 = 5000$</math-renderer><br>
+<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_5 = 10000$</math-renderer><br>
+<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_6 = 20000$</math-renderer><br>
+<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_7 = 30000$</math-renderer><br>
+<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_8 = 40000$</math-renderer><br>
+<math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_9 = 50000$</math-renderer></p>
 <p dir="auto">亂數seed = 42</p>
 </blockquote>
 <h3 dir="auto">實驗結果</h3>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_1 = 100$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_1 = 100$</math-renderer></p>
 <markdown-accessiblity-table><table role="table">
 <thead>
 <tr>
@@ -394,7 +394,7 @@
 </tr>
 </tbody>
 </table></markdown-accessiblity-table>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_2 = 500$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_2 = 500$</math-renderer></p>
 <markdown-accessiblity-table><table role="table">
 <thead>
 <tr>
@@ -467,7 +467,7 @@
 </tr>
 </tbody>
 </table></markdown-accessiblity-table>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_3 = 1000$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_3 = 1000$</math-renderer></p>
 <markdown-accessiblity-table><table role="table">
 <thead>
 <tr>
@@ -540,7 +540,7 @@
 </tr>
 </tbody>
 </table></markdown-accessiblity-table>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_4 = 5000$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_4 = 5000$</math-renderer></p>
 <markdown-accessiblity-table><table role="table">
 <thead>
 <tr>
@@ -613,7 +613,7 @@
 </tr>
 </tbody>
 </table></markdown-accessiblity-table>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_5 = 10000$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_5 = 10000$</math-renderer></p>
 <markdown-accessiblity-table><table role="table">
 <thead>
 <tr>
@@ -686,7 +686,7 @@
 </tr>
 </tbody>
 </table></markdown-accessiblity-table>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_6 = 20000$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_6 = 20000$</math-renderer></p>
 <markdown-accessiblity-table><table role="table">
 <thead>
 <tr>
@@ -759,7 +759,7 @@
 </tr>
 </tbody>
 </table></markdown-accessiblity-table>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_7 = 30000$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_7 = 30000$</math-renderer></p>
 <markdown-accessiblity-table><table role="table">
 <thead>
 <tr>
@@ -832,7 +832,7 @@
 </tr>
 </tbody>
 </table></markdown-accessiblity-table>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_8 = 40000$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_8 = 40000$</math-renderer></p>
 <markdown-accessiblity-table><table role="table">
 <thead>
 <tr>
@@ -905,7 +905,7 @@
 </tr>
 </tbody>
 </table></markdown-accessiblity-table>
-<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="9a71940b94d3feea7ef1da116d7da7cf">$n_9 = 50000$</math-renderer></p>
+<p dir="auto"><math-renderer class="js-inline-math" style="display: inline-block" data-run-id="6b2bbc943c01d54ee6f91888b1c61632">$n_9 = 50000$</math-renderer></p>
 <markdown-accessiblity-table><table role="table">
 <thead>
 <tr>
