@@ -69,16 +69,6 @@ async function preFetchAll() {
 
 		const githubUrl = urlMatch[1].trim()
 
-		// 檢查是否啟用強制更新模式 (支援環境變數與參數)
-		const forceUpdate = process.env.FORCE_UPDATE === 'true' || process.argv.includes('--update') || process.argv.includes('-u')
-
-		// 若已有內文且非強制更新，則跳過
-		if (bodyText !== '' && !forceUpdate) {
-			continue
-		}
-
-		console.log(`${colors.yellow}偵測到作品 [${file}] 尚未填入內文。正在從 GitHub 載入: ${githubUrl} ...${colors.reset}`)
-
 		// Parse repository owner and name
 		let owner = ''
 		let repo = ''
@@ -98,21 +88,36 @@ async function preFetchAll() {
 			continue
 		}
 
+		// 檢查本地是否已有預先編譯好的 HTML 檔案
+		const htmlFilePath = path.join(__dirname, '../public/works', file.replace(/\.md$/, '.html'))
+		const hasLocalHtml = fs.existsSync(htmlFilePath)
+
+		// 檢查本地 md 中的 githubSha
+		const shaMatch = frontmatterText.match(/githubSha:\s*["']?([a-zA-Z0-9]+)["']?/)
+		const localSha = shaMatch ? shaMatch[1] : ''
+
 		try {
-			// Fetch README markdown content from GitHub API
+			// Fetch README metadata from GitHub API (contains latest SHA)
 			const readmeRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/readme`, { headers })
 			
 			if (readmeRes.ok) {
 				const readmeData = await readmeRes.json()
+				const liveSha = readmeData.sha || ''
+
+				// 比對 SHA，若一致且本地已有 HTML 檔案，則直接跳過
+				if (hasLocalHtml && localSha === liveSha) {
+					console.log(`${colors.green}✔ [${file}] 內容與 HTML 一致，跳過更新。${colors.reset}`)
+					continue
+				}
+
+				console.log(`${colors.yellow}偵測到作品 [${file}] 有更新。正在從 GitHub 載入...${colors.reset}`)
+
 				let readmeContent = ''
-				
 				if (readmeData.encoding === 'base64' && readmeData.content) {
 					readmeContent = Buffer.from(readmeData.content, 'base64').toString('utf-8')
 				} else {
 					readmeContent = readmeData.content || ''
 				}
-
-				const liveSha = readmeData.sha || ''
 
 				// 調用 GitHub Markdown API 來取得渲染後的 HTML
 				const markdownRes = await fetch('https://api.github.com/markdown', {
@@ -139,19 +144,6 @@ async function preFetchAll() {
 				const publicWorksDir = path.join(__dirname, '../public/works')
 				if (!fs.existsSync(publicWorksDir)) {
 					fs.mkdirSync(publicWorksDir, { recursive: true })
-				}
-
-				const htmlFilePath = path.join(publicWorksDir, file.replace(/\.md$/, '.html'))
-				let localHtml = ''
-				if (fs.existsSync(htmlFilePath)) {
-					localHtml = fs.readFileSync(htmlFilePath, 'utf-8')
-				}
-
-				// 比對 HTML 與 SHA，若都一致則跳過
-				const hasSha = frontmatterText.includes(`githubSha: "${liveSha}"`)
-				if (hasSha && localHtml.trim() === readmeHtml.trim() && bodyText.trim() === '') {
-					console.log(`${colors.green}✔ [${file}] 內容與 HTML 一致，跳過更新。${colors.reset}`)
-					continue
 				}
 
 				// 移除舊的 readmeLength 欄位，並寫入/更新 githubSha
