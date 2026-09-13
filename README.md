@@ -254,3 +254,10 @@ pnpm preview
 ##  聯繫方式
 
 有問題或建議？歡迎提交 Issue 或 Pull Request！
+
+## 內容 API
+
+提供文章與影片的唯讀 JSON API（給 LINE 機器人等外部程式用）：
+`https://cycu-bridgeai.github.io/BridgeAI-Learn/api/v1/`
+
+使用說明見 [docs/API.md](docs/API.md)。
