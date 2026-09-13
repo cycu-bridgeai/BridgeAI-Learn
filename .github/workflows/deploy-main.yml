@@ -54,6 +54,8 @@ jobs:
         run: pnpm install --no-frozen-lockfile
       - name: Static HTML export with Nuxt
         run: pnpm run generate
+      - name: Verify static API
+        run: node scripts/verify-api.mjs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
