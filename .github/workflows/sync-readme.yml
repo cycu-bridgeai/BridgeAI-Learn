@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write # 確保 action 具有寫入/推送權限
+  actions: write # 允許觸發部署 workflow
 
 jobs:
   sync:
@@ -36,9 +37,23 @@ jobs:
           FORCE_UPDATE: 'true'
 
       - name: Commit and Push changes
+        id: push
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add content/works/ public/works/
-          # 檢查是否有檔案變更，若有則提交並推送到 main，觸發部署
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-update works READMEs" && git push origin main)
+          # 檢查是否有檔案變更，若有則提交並推送到 main
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "作品內容無變更，不推送"
+          else
+            git commit -m "chore: auto-update works READMEs"
+            git push origin main
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # GITHUB_TOKEN 推送不會觸發 push 事件，需手動觸發部署
+      - name: Trigger deploy
+        if: steps.push.outputs.pushed == 'true'
+        run: gh workflow run deploy-main.yml --ref main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
