@@ -77,7 +77,7 @@ const tocLinks = computed<TocLink[]>(() => {
           <NuxtLink
             v-if="unitName"
             :to="backTo"
-            class="inline-block mb-3 px-2.5 py-0.5 bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-medium rounded-full"
+            class="inline-block mb-3 px-2.5 py-0.5 bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 text-xs font-medium rounded-full hover:bg-emerald-100 dark:hover:bg-emerald-800 transition-colors"
           >
             {{ unitName }}
           </NuxtLink>
