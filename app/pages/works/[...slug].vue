@@ -230,34 +230,34 @@ onMounted(() => {
 <template>
   <aside
     v-if="work && tocLinks.length"
-    class="group fixed bottom-0 left-0 top-16 z-20 hidden w-72 -translate-x-60 transition-transform duration-200 ease-out hover:translate-x-0 focus-within:translate-x-0 xl:block"
+    class="section-works group fixed bottom-0 left-0 top-16 z-20 hidden w-72 -translate-x-60 transition-transform duration-200 ease-out hover:translate-x-0 focus-within:translate-x-0 xl:block"
   >
-    <div class="relative h-full border-r border-gray-200 bg-white/95 py-6 pl-5 pr-14 shadow-lg shadow-gray-900/10 backdrop-blur dark:border-gray-700 dark:bg-gray-900/95 dark:shadow-black/30">
+    <div class="relative h-full border-r border-line bg-page/95 py-6 pl-5 pr-14 shadow-lg shadow-ink/10 backdrop-blur">
       <div class="h-full overflow-y-auto pr-2">
         <Sidebar :links="tocLinks" title="目錄" />
       </div>
-      <div class="absolute right-0 top-6 flex h-28 w-12 items-center justify-center rounded-r-lg border border-l-0 border-gray-200 bg-white text-xs font-bold tracking-widest text-gray-500 shadow-sm transition-colors group-hover:text-purple-700 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400 dark:group-hover:text-purple-300">
+      <div class="absolute right-0 top-6 flex h-28 w-12 items-center justify-center rounded-r-lg border border-l-0 border-line bg-page text-xs font-bold tracking-widest text-ink-muted shadow-sm transition-colors group-hover:text-section">
         <span class="[writing-mode:vertical-rl]">目錄</span>
       </div>
     </div>
   </aside>
 
-  <article v-if="work" class="relative left-1/2 w-screen -translate-x-1/2 px-4 sm:px-6 lg:px-8">
+  <article v-if="work" class="section-works relative left-1/2 w-screen -translate-x-1/2 px-4 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-[52rem]">
       <main class="min-w-0">
-        <NuxtLink to="/works" class="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 font-semibold text-xs sm:text-sm rounded-lg hover:shadow-[0_0_15px_rgba(147,51,234,0.4)] hover:scale-105 transition-all duration-300 mb-8">
+        <SectionButton to="/works" section="works" class="mb-8">
           Back to Works
-        </NuxtLink>
+        </SectionButton>
 
         <header class="mb-10">
           <div class="flex flex-wrap items-center gap-2 mb-3">
-            <span class="px-2.5 py-0.5 bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-300 text-xs font-bold rounded-lg shrink-0">
+            <span class="px-2.5 py-0.5 bg-section/10 text-section text-xs font-bold rounded-card shrink-0">
                👤 作者: {{ work.author }}
             </span>
           </div>
           
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white leading-tight mb-4">{{ work.title }}</h1>
-          <p class="text-lg text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">{{ work.description }}</p>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-ink leading-tight mb-4">{{ work.title }}</h1>
+          <p class="text-lg text-ink-muted mb-6 leading-relaxed">{{ work.description }}</p>
 
           <!-- Integration buttons inside detail page header -->
           <div v-if="work.demoUrl || work.githubUrl" class="flex flex-wrap gap-3 mb-6">
@@ -266,7 +266,7 @@ onMounted(() => {
               :href="work.demoUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg flex items-center gap-2 transition-all hover:scale-105 shadow-md shadow-purple-500/20 active:scale-95 text-sm"
+              class="px-5 py-2.5 bg-section hover:bg-section/90 text-white font-semibold rounded-card flex items-center gap-2 transition-all hover:scale-105 shadow-md shadow-section/20 active:scale-95 text-sm"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -279,7 +279,7 @@ onMounted(() => {
               :href="work.githubUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="px-5 py-2.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold rounded-lg flex items-center gap-2 transition-all hover:scale-105 active:scale-95 border border-gray-200 dark:border-gray-700 text-sm"
+              class="px-5 py-2.5 bg-surface-muted hover:bg-surface-muted text-ink font-semibold rounded-card flex items-center gap-2 transition-all hover:scale-105 active:scale-95 border border-line text-sm"
             >
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
@@ -288,47 +288,45 @@ onMounted(() => {
             </a>
           </div>
 
-          <div class="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 border-t border-gray-100 dark:border-gray-800">
-            <time class="text-sm text-gray-400 dark:text-gray-500">{{ formatDate(work.date) }}</time>
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 border-t border-line">
+            <time class="text-sm text-ink-muted">{{ formatDate(work.date) }}</time>
 
             <div v-if="work.tags?.length" class="flex flex-wrap gap-2">
-              <NuxtLink
+              <TagChip
                 v-for="tag in work.tags"
                 :key="tag"
-                :to="`/tags/${tag}`"
-                class="px-2.5 py-0.5 bg-purple-50 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 text-xs font-medium rounded-full hover:bg-purple-100 dark:hover:bg-purple-800 transition-colors"
-              >
-                #{{ tag }}
-              </NuxtLink>
+                :tag="tag"
+                section="works"
+              />
             </div>
           </div>
 
-          <details v-if="tocLinks.length" class="mt-6 rounded-lg border border-gray-200 bg-white/80 p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900/40 xl:hidden">
-            <summary class="cursor-pointer text-sm font-bold text-gray-900 dark:text-white">文章目錄</summary>
+          <details v-if="tocLinks.length" class="mt-6 rounded-card border border-line bg-surface-muted p-4 shadow-sm xl:hidden">
+            <summary class="cursor-pointer text-sm font-bold text-ink">文章目錄</summary>
             <Sidebar :links="tocLinks" title="" class="mt-3" />
           </details>
 
-          <img v-if="thumbnailSrc" :src="thumbnailSrc" :alt="work.title" class="w-full rounded-2xl object-cover mt-6" />
+          <img v-if="thumbnailSrc" :src="thumbnailSrc" :alt="work.title" class="w-full rounded-panel object-cover mt-6" />
         </header>
 
         <!-- Dynamic Update Notification Banner -->
         <div 
           v-if="hasUpdate || isUpdating || errorMessage" 
-          class="mb-8 p-4 rounded-xl border transition-all duration-300 shadow-sm"
+          class="mb-8 p-4 rounded-card border transition-all duration-300 shadow-sm"
           :class="[
             errorMessage 
-              ? 'bg-rose-50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-900/50 text-rose-800 dark:text-rose-200' 
-              : 'bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900/50 text-amber-800 dark:text-amber-200'
+              ? 'bg-error/10 border-error/30 text-error' 
+              : 'bg-warning/10 border-warning/30 text-warning'
           ]"
         >
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div class="flex items-center gap-3">
               <div 
                 class="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
-                :class="[errorMessage ? 'bg-rose-100 dark:bg-rose-900/40' : 'bg-amber-100 dark:bg-amber-900/40']"
+                :class="[errorMessage ? 'bg-error/10' : 'bg-warning/10']"
               >
-                <span v-if="isUpdating" class="animate-spin text-amber-600 dark:text-amber-400">🌀</span>
-                <span v-else-if="errorMessage" class="text-rose-500">⚠️</span>
+                <span v-if="isUpdating" class="animate-spin text-warning">🌀</span>
+                <span v-else-if="errorMessage" class="text-error">⚠️</span>
                 <span v-else class="animate-pulse">💡</span>
               </div>
 							<div>
@@ -348,13 +346,13 @@ onMounted(() => {
 							<button
 								v-if="hasUpdate"
 								@click="loadLatestContent"
-								class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-lg shadow transition-all active:scale-95 shrink-0"
+								class="px-3.5 py-1.5 bg-warning hover:bg-warning/90 text-white font-bold text-xs rounded-card shadow transition-all active:scale-95 shrink-0"
 							>
 								閱讀新版
 							</button>
 							<button 
 								@click="hasUpdate = false; errorMessage = ''" 
-								class="px-2.5 py-1.5 bg-transparent hover:bg-black/5 dark:hover:bg-white/5 border border-black/10 dark:border-white/10 text-xs font-medium rounded-lg shrink-0"
+								class="px-2.5 py-1.5 bg-transparent hover:bg-surface-muted border border-line text-xs font-medium rounded-card shrink-0"
 							>
 								暫時不用
 							</button>
@@ -362,9 +360,9 @@ onMounted(() => {
           </div>
         </div>
 
-        <div v-if="latestHtml" class="prose prose-gray dark:prose-invert prose-lg max-w-none dark:text-gray-300" v-html="formatHtmlContent(latestHtml)" />
-        <div v-else-if="localHtml" class="prose prose-gray dark:prose-invert prose-lg max-w-none dark:text-gray-300" v-html="formatHtmlContent(localHtml)" />
-        <div v-else class="prose prose-gray dark:prose-invert prose-lg max-w-none dark:text-gray-300">
+        <div v-if="latestHtml" class="prose prose-gray dark:prose-invert prose-lg max-w-none" v-html="formatHtmlContent(latestHtml)" />
+        <div v-else-if="localHtml" class="prose prose-gray dark:prose-invert prose-lg max-w-none" v-html="formatHtmlContent(localHtml)" />
+        <div v-else class="prose prose-gray dark:prose-invert prose-lg max-w-none">
           <ContentRenderer :value="work" />
         </div>
       </main>

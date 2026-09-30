@@ -21,5 +21,5 @@ useSeoMeta({
 </script>
 
 <template>
-  <ArticleView v-if="data?.post" :post="data.post" back-to="/cs" back-label="回計概專區" :unit-name="data.unitName" />
+  <ArticleView v-if="data?.post" :post="data.post" back-to="/cs" back-label="回計概專區" :unit-name="data.unitName" section="cs" />
 </template>

@@ -30,28 +30,29 @@ const results = computed(() => {
 <template>
   <div>
     <div class="mb-6">
-      <NuxtLink to="/" class="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-semibold text-xs sm:text-sm rounded-lg hover:shadow-[0_0_15px_rgba(107,114,128,0.4)] hover:scale-105 transition-all duration-300 mb-4">
+      <SectionButton to="/" section="neutral" class="mb-4">
         ↑ Back to Home
-      </NuxtLink>
+      </SectionButton>
     </div>
-    <h1 class="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white flex items-center gap-3">
-        <span class="text-blue-600">#</span> {{ tag }}
+    <h1 class="text-3xl sm:text-4xl font-black text-ink flex items-center gap-3">
+        <span class="text-section">#</span> {{ tag }}
       </h1>
-    <p class="text-gray-500 dark:text-gray-400 mt-2 mb-10">
+    <p class="text-ink-muted mt-2 mb-10">
       Showing all articles, videos, and student works tagged with "{{ tag }}".
     </p>
 
     <div v-if="results.length" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <template v-for="item in results" :key="item.path">
-        <PostCard v-if="item.type === 'blog' || item.type === 'cs'" :post="item as any" />
+        <PostCard v-if="item.type === 'blog'" :post="item as any" />
+        <PostCard v-else-if="item.type === 'cs'" :post="item as any" section="cs" />
         <WorkCard v-else-if="item.type === 'work'" :work="item as any" />
         <VideoCard v-else :video="item as any" />
       </template>
     </div>
     
     <div v-else class="py-20 text-center">
-      <p class="text-gray-400 dark:text-gray-500 text-lg">No content found for this tag.</p>
-      <NuxtLink to="/" class="mt-4 inline-block px-6 py-2 bg-blue-600 text-white rounded-lg">
+      <p class="text-ink-muted text-lg">No content found for this tag.</p>
+      <NuxtLink to="/" class="mt-4 inline-block px-6 py-2 bg-section hover:bg-section/90 text-white rounded-card">
         Go Home
       </NuxtLink>
     </div>
