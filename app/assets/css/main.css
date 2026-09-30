@@ -1,10 +1,22 @@
-.prose img {
-	border: 2px solid #111;
-	border-radius: 6px;
+/* 顏色一律取自 theme.css 的變數，淺深色由變數自動切換 */
+.prose pre {
+	max-width: 100%;
+	overflow-x: auto;
+	border: 1px solid rgb(var(--color-code-line));
+	background-color: rgb(var(--color-code-surface));
+	color: rgb(var(--color-code-ink));
 }
 
-.dark .prose img {
-	border-color: #555;
+.prose pre code {
+	background: transparent;
+	padding: 0;
+	font-weight: 400;
+	color: inherit;
+}
+
+.prose img {
+	border: 2px solid rgb(var(--color-prose-img-border));
+	border-radius: 6px;
 }
 
 /* 移除 Tailwind Typography 自動加在 blockquote 的英文引號 */
@@ -17,15 +29,10 @@
 .prose blockquote {
 	border-left: none !important;
 	border-inline-start: none !important;
-	background-color: #f5f5f5 !important;
+	background-color: rgb(var(--color-surface-muted)) !important;
 	border-radius: 0.5rem !important;
 	padding: 0.875rem 1.25rem !important;
 	font-style: normal !important;
-	color: inherit !important;
-}
-
-.dark .prose blockquote {
-	background-color: #2a2a2a !important;
 	color: inherit !important;
 }
 
@@ -45,30 +52,18 @@
 /* 讓 markdown 表格擁有清晰格線與斑馬紋 */
 .prose table {
 	border-collapse: collapse;
-	border: 1px solid #e2e8f0;
+	border: 1px solid rgb(var(--color-line));
 	width: 100%;
 }
-.dark .prose table {
-	border-color: #374151;
-}
 .prose th, .prose td {
-	border: 1px solid #e2e8f0 !important;
+	border: 1px solid rgb(var(--color-line)) !important;
 	padding: 0.625rem 0.875rem !important;
 	font-size: 0.875rem;
 }
-.dark .prose th, .dark .prose td {
-	border-color: #374151 !important;
-}
 .prose th {
-	background-color: #f8fafc;
+	background-color: rgb(var(--color-surface-muted));
 	font-weight: 700;
 }
-.dark .prose th {
-	background-color: #1f2937;
-}
 .prose tr:nth-child(even) {
-	background-color: #f8fafc;
-}
-.dark .prose tr:nth-child(even) {
-	background-color: rgba(31, 41, 55, 0.4);
+	background-color: rgb(var(--color-surface-muted) / 0.6);
 }

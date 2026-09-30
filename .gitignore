@@ -10,6 +10,7 @@ pnpm-lock.yaml
 .env.local
 .env.*.local
 dist/
+dist
 
 # Local development files
 FRONTEND_IMPROVEMENT_PLAN.md
@@ -50,4 +51,9 @@ BridgeAI-Learn/
 
 .codex/skills/ui-ux-pro-max/
 
-docs/
+docs/*
+!docs/superpowers/
+
+# Claude Code：只有 repo 內技能進版控（worktrees、本機設定、orchestrator.db 不進）
+.claude/*
+!.claude/skills/

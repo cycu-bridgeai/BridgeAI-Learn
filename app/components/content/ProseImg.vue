@@ -165,7 +165,7 @@ const overlayCursor = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.84);
+  background: rgb(var(--color-overlay) / 0.84);
   outline: none;
   user-select: none;
 }
@@ -175,7 +175,7 @@ const overlayCursor = computed(() => {
   max-height: 85vh;
   object-fit: contain;
   border-radius: 0.75rem;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 25px 60px rgb(var(--color-overlay) / 0.6);
   cursor: inherit;
   transition: transform 0.1s ease;
   pointer-events: none;
@@ -186,7 +186,8 @@ const overlayCursor = computed(() => {
   bottom: 1.25rem;
   left: 50%;
   transform: translateX(-50%);
-  color: rgba(255, 255, 255, 0.45);
+  color: white;
+  opacity: 0.45;
   font-size: 0.75rem;
   pointer-events: none;
   white-space: nowrap;

@@ -1,0 +1,84 @@
+/* 全站樣式設定：改這裡，整個網站跟著變。色值格式為「R G B」三個數字（0–255）。 */
+/* 淺色模式在 :root，深色模式在 .dark，兩邊變數名稱一樣。 */
+:root {
+	/* ── 基本色 ── */
+	--color-page: 255 255 255;          /* 頁面背景 */
+	--color-surface: 255 255 255;       /* 卡片背景 */
+	--color-surface-muted: 248 250 252; /* 次要背景：表格斑馬紋、引用、程式碼、中性按鈕 */
+	--color-header: 255 255 255;        /* 導覽列、頁尾背景 */
+	--color-ink: 17 24 39;              /* 主要文字 */
+	--color-ink-muted: 107 114 128;     /* 次要文字：說明、日期 */
+	--color-line: 229 231 235;          /* 邊線、分隔線 */
+
+	/* ── 各區主色 ── */
+	--color-blog: 37 99 235;            /* Blog 藍 */
+	--color-cs: 5 150 105;              /* 計概 綠 */
+	--color-videos: 220 38 38;          /* Videos 紅 */
+	--color-works: 147 51 234;          /* Works 紫 */
+	--color-neutral: 107 114 128;       /* 中性按鈕（Back to Home） */
+
+	/* ── 狀態色（示意圖、提示框） ── */
+	--color-success: 5 150 105;         /* 成功 */
+	--color-error: 220 38 38;           /* 錯誤 */
+	--color-warning: 217 119 6;         /* 提醒；深色模式的月亮圖示 */
+
+	/* ── 文章排版 ── */
+	--color-prose-h2: 30 41 59;         /* 文章 h2 */
+	--color-prose-h3: 37 99 235;        /* 文章 h3 */
+	--color-prose-strong: 5 150 105;    /* 文章粗體 */
+	--color-prose-img-border: 17 17 17; /* 文章圖片外框 */
+	--color-code-surface: 246 248 250;  /* 亮色程式區塊 */
+	--color-code-ink: 36 41 47;         /* 未上色的程式文字 */
+	--color-code-line: 208 215 222;    /* 程式區塊邊線 */
+	--color-overlay: 0 0 0;             /* 圖片放大時的遮罩 */
+
+	/* ── 字型 ── */
+	--font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+	/* ── 圓角與光暈 ── */
+	--radius-chip: 9999px;              /* tag */
+	--radius-card: 0.5rem;              /* 按鈕、卡片 */
+	--radius-panel: 1rem;               /* 縮圖、大區塊 */
+	--glow: 0 0 15px;                   /* hover 光暈大小（透明度固定 0.4） */
+
+	/* 沒掛 section-* 時的預設主色 */
+	--color-section: var(--color-blog);
+}
+
+.dark {
+	--color-page: 17 24 39;
+	--color-surface: 3 7 18;
+	--color-surface-muted: 31 41 55;
+	--color-header: 31 41 55;
+	--color-ink: 255 255 255;
+	--color-ink-muted: 156 163 175;
+	--color-line: 55 65 81;
+
+	--color-blog: 96 165 250;
+	--color-cs: 52 211 153;
+	--color-videos: 248 113 113;
+	--color-works: 192 132 252;
+	--color-neutral: 156 163 175;
+
+	--color-success: 52 211 153;
+	--color-error: 248 113 113;
+	--color-warning: 251 191 36;
+
+	--color-prose-h2: 241 245 249;
+	--color-prose-h3: 96 165 250;
+	--color-prose-strong: 16 185 129;
+	--color-prose-img-border: 85 85 85;
+	--color-code-surface: 13 17 23;
+	--color-code-ink: 201 209 217;
+	--color-code-line: 48 54 61;
+
+	--color-section: var(--color-blog);
+}
+
+/* 區塊主色切換：元件掛上其中一個 class，內部的 *-section 就吃到該區顏色 */
+.section-blog { --color-section: var(--color-blog); }
+.section-cs { --color-section: var(--color-cs); }
+.section-videos { --color-section: var(--color-videos); }
+.section-works { --color-section: var(--color-works); }
+.section-neutral { --color-section: var(--color-neutral); }

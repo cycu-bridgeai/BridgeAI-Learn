@@ -36,7 +36,7 @@ function checkItem(item, type, where) {
 	check(Array.isArray(item.tags), `${where}: tags 應為陣列`)
 	check(String(item.url).startsWith(`${siteBase}/`), `${where}: url 應以 ${siteBase}/ 開頭`)
 	check(item.thumbnail === null || /^https:\/\//.test(item.thumbnail), `${where}: thumbnail 應為 https 網址或 null`)
-	if (type === 'article' && typeof item.thumbnail === 'string' && item.thumbnail.startsWith(siteBase)) {
+	if ((type === 'article' || type === 'cs') && typeof item.thumbnail === 'string' && item.thumbnail.startsWith(siteBase)) {
 		const rel = decodeURI(item.thumbnail.slice(siteBase.length))
 		check(fs.existsSync(path.join(root, 'public', rel)), `${where}: 縮圖檔不存在 public${rel}`)
 	}
@@ -68,10 +68,11 @@ function checkList(rel, type, folder, expectedCount) {
 
 const articles = checkList('articles.json', 'article', 'articles', countMarkdown('blog'))
 const videos = checkList('videos.json', 'video', 'videos', countMarkdown('videos'))
+const cs = checkList('cs.json', 'cs', 'cs', countMarkdown('cs'))
 
 const all = readJson('items.json')
 if (all) {
-	check(all.count === articles.length + videos.length, 'items.json: 筆數應等於文章加影片')
+	check(all.count === articles.length + videos.length + cs.length, 'items.json: 筆數應等於文章、影片與計概文章總和')
 	check(all.count === all.items.length, 'items.json: count 與 items 長度不符')
 	const dates = all.items.map(item => item.date)
 	check(dates.every((date, i) => i === 0 || dates[i - 1] >= date), 'items.json: 應依日期新到舊排序')
@@ -82,4 +83,4 @@ if (errors.length > 0) {
 	console.error(`API 驗證失敗（${errors.length} 項）：\n- ${errors.join('\n- ')}`)
 	process.exit(1)
 }
-console.log(`API 驗證通過：文章 ${articles.length} 篇、影片 ${videos.length} 部`)
+console.log(`API 驗證通過：文章 ${articles.length} 篇、影片 ${videos.length} 部、計概 ${cs.length} 篇`)

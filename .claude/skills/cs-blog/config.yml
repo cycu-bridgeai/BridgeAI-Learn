@@ -1,0 +1,28 @@
+# /cs-blog 技能設定（路徑相對於 repo 根目錄，除非是絕對路徑）
+
+# 上課資料（需求單 sources.type=course 的檔案都從這裡找）
+courseMaterials: /mnt/c/Users/pjw92/Desktop/計概課程資料/
+
+# 「還是卡住？」段落的連結
+assistantUrl: https://bridgeai.jywglady.org   # BridgeAI 平台正式站（平台 repo 的 FRONTEND_BASE_URL）
+assistantGuide: /blog/ai-debugging-questions   # 本站問答式除錯說明
+
+# 每篇計概文章在大綱階段都要檢查是否有對題的課堂影片
+courseVideoChannel: https://www.youtube.com/channel/UCR8pxSRgz2rNXM5XXOISacQ
+
+# 程式碼實測
+gccMajor: 13
+
+# 縮圖
+thumbnailSize: 1600x900
+thumbnailMaxRetries: 3
+thumbnailStyleRefs:
+  - public/images/system_intro_thumbnail.png
+  - public/images/exams_thumbnail.png
+
+# 全站配色（示意圖、縮圖主色從這裡取）
+themeFile: app/assets/css/theme.css
+
+# 輸出位置
+contentDir: content/cs
+imageDir: public/images/cs

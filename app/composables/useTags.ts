@@ -11,10 +11,11 @@ export const useTags = () => {
    * @returns {Promise<string[]>} Array of unique tags sorted alphabetically
    */
   const collectTags = async (): Promise<string[]> => {
-    const [blogs, videos, works] = await Promise.all([
+    const [blogs, videos, works, cs] = await Promise.all([
       queryCollection('blog').all(),
       queryCollection('videos').all(),
       queryCollection('works').all(),
+      queryCollection('cs').all(),
     ])
 
     // Aggregate all tags into a Set for deduplication
@@ -38,6 +39,12 @@ export const useTags = () => {
       }
     })
 
+    cs.forEach(post => {
+      if (post.tags && Array.isArray(post.tags)) {
+        post.tags.forEach(tag => tagsSet.add(tag))
+      }
+    })
+
     // Convert to sorted array
     return Array.from(tagsSet).sort((a, b) => a.localeCompare(b))
   }
@@ -49,10 +56,11 @@ export const useTags = () => {
    */
   const getContentByTag = async (tag: string) => {
     // Fetch all content from both collections
-    const [allBlogs, allVideos, allWorks] = await Promise.all([
+    const [allBlogs, allVideos, allWorks, allCs] = await Promise.all([
       queryCollection('blog').order('date', 'DESC').all(),
       queryCollection('videos').order('date', 'DESC').all(),
       queryCollection('works').order('date', 'DESC').all(),
+      queryCollection('cs').order('date', 'DESC').all(),
     ])
 
     // Filter by tag locally (safer approach for tag arrays)
@@ -68,11 +76,16 @@ export const useTags = () => {
       work.tags && Array.isArray(work.tags) && work.tags.includes(tag)
     )
 
+    const cs = allCs.filter(post =>
+      post.tags && Array.isArray(post.tags) && post.tags.includes(tag)
+    )
+
     return {
       blogs,
       videos,
       works,
-      total: blogs.length + videos.length + works.length,
+      cs,
+      total: blogs.length + videos.length + works.length + cs.length,
     }
   }
 

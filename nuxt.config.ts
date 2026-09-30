@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   app: {
     baseURL: import.meta.env.NUXT_APP_BASE_URL || '/BridgeAI-Learn/',
   },
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/theme.css', '~/assets/css/main.css'],
   modules: ['@nuxt/content', '@nuxtjs/tailwindcss'],
   runtimeConfig: {
     siteOrigin: 'https://cycu-bridgeai.github.io',
@@ -21,7 +21,10 @@ export default defineNuxtConfig({
     build: {
       markdown: {
         highlight: {
-          theme: 'github-dark',
+          theme: {
+            default: 'github-light',
+            dark: 'github-dark',
+          },
         },
       },
     },

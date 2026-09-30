@@ -1,6 +1,6 @@
 import type { H3Event } from 'h3'
 import { queryCollection } from '@nuxt/content/server'
-import { sortByDateDesc, toArticleItem, toSiteBase, toVideoItem } from './api-items'
+import { sortByDateDesc, toArticleItem, toCsItem, toSiteBase, toVideoItem } from './api-items'
 import type { ApiItem, SiteContext } from './api-items'
 
 function getSiteContext(event: H3Event): SiteContext {
@@ -25,4 +25,12 @@ export async function getVideoItems(event: H3Event): Promise<ApiItem[]> {
 		.select('path', 'title', 'description', 'date', 'tags', 'youtubeId')
 		.all()
 	return sortByDateDesc(docs.map(doc => toVideoItem(doc, site)))
+}
+
+export async function getCsItems(event: H3Event): Promise<ApiItem[]> {
+	const site = getSiteContext(event)
+	const docs = await queryCollection(event, 'cs')
+		.select('path', 'title', 'description', 'date', 'tags', 'thumbnail')
+		.all()
+	return sortByDateDesc(docs.map(doc => toCsItem(doc, site)))
 }

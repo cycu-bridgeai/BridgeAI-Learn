@@ -24,6 +24,17 @@ export default defineContentConfig({
         tags: z.array(z.string()).optional(),
       }),
     }),
+    cs: defineCollection({
+      type: 'page',
+      source: 'cs/**/*.md',
+      schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        date: z.string(),
+        tags: z.array(z.string()).optional(),
+        thumbnail: z.string().optional(),
+      }),
+    }),
     works: defineCollection({
       type: 'page',
       source: 'works/**/*.md',
