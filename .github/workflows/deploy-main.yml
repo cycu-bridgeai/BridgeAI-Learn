@@ -58,6 +58,8 @@ jobs:
         run: node scripts/verify-api.mjs
       - name: Verify cs zone
         run: node scripts/verify-cs.mjs
+      - name: Verify favicon
+        run: node scripts/verify-favicon.mjs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

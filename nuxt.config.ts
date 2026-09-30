@@ -1,7 +1,12 @@
+const baseURL = (import.meta.env.NUXT_APP_BASE_URL || '/BridgeAI-Learn/').replace(/\/?$/, '/')
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-01-01',
   app: {
-    baseURL: import.meta.env.NUXT_APP_BASE_URL || '/BridgeAI-Learn/',
+    baseURL,
+    head: {
+      link: [{ rel: 'icon', type: 'image/x-icon', href: `${baseURL}favicon.ico` }],
+    },
   },
   css: ['~/assets/css/theme.css', '~/assets/css/main.css'],
   modules: ['@nuxt/content', '@nuxtjs/tailwindcss'],
