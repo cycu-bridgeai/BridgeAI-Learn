@@ -254,3 +254,7 @@ tags: [c, scanf]                 # 身份 tag 由 audience 自動補上，不用
 - 不 push、不 merge（main 一 push 就自動部署）。
 - 不碰主工作目錄 `Nick_dev` 的未提交改動。
 - 縮排 Tab；註解中文，密度跟隨既有程式碼。
+
+## 狀態紀錄
+
+- 2026-09-30 後續修正：網站端、`/cs-blog` 技能完成；驗收文章 1（`scanf-comma-input`）完成。審稿後新增寫作規則：白話、資訊密集、程式碼與題目不用圖片（見 SKILL.md §4.4）。（commit 待補 hash）
