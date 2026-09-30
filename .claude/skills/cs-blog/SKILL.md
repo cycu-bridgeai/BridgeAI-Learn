@@ -84,7 +84,20 @@ description: 把「學生上課卡關點」＋截圖／上課資料做成計概�
 
 ### 4.2 示意圖
 
-用 `diagram-design` 技能畫 SVG，存成 `public/images/cs/<slug>-diagram-NN.svg`，文中 `![圖說](/images/cs/<slug>-diagram-NN.svg)`。
+只畫**不含程式碼**的概念圖（見 4.4），能用表格或 `text` 區塊講清楚就不畫。用 `diagram-design` 技能畫 SVG，存成 `public/images/cs/<slug>-diagram-NN.svg`，文中 `![圖說](/images/cs/<slug>-diagram-NN.svg)`。
+
+配色（使用者選「跟網站一致」，已是本專案的 diagram-design 客製樣式，不必再問）：從 `app/assets/css/theme.css` 讀 `:root` 的淺色值，`R G B` 換成 hex：
+
+| 用途 | 變數 |
+|---|---|
+| 背景 | `--color-surface` |
+| 主要文字、框線 | `--color-ink` |
+| 次要文字 | `--color-ink-muted` |
+| 分隔線、虛線 | `--color-line` |
+| 重點（1–2 處） | `--color-cs` |
+| 成功／錯誤 | `--color-success`／`--color-error` |
+
+字型：`'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif`（SVG 以 `<img>` 嵌入，讀不到網站字型與 CSS 變數，所以色碼要寫死在 SVG 內）。**改了 `theme.css` 的顏色後，已發布的示意圖要重畫才會跟著變。**
 
 ### 4.3 截圖
 
@@ -127,6 +140,7 @@ description: 把「學生上課卡關點」＋截圖／上課資料做成計概�
 
 1. 寫派工 prompt（英文）到 scratchpad，重點：
    - 16:9，1600×900；風格比照 `config.yml` 的 `thumbnailStyleRefs`（請它先看這兩張圖）：中文大標題＋與主題相關的插圖。
+   - 主色用 `app/assets/css/theme.css` 的 `--color-cs` 淺色值（`R G B` 換成 hex 寫進 prompt）。
    - 圖上**只能有**這段中文標題（逐字給出），不要其他文字。
    - 輸出存到 `<scratchpad>/<slug>/thumb-raw.png`，回報檔案路徑。
 2. 派給 AGY（`worker-frontend` 角色；規範見 `agy-dispatch` 技能，不帶 `--yolo`）：

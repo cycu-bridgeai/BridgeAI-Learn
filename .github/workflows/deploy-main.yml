@@ -52,6 +52,8 @@ jobs:
             ${{ runner.os }}-nuxt-build-
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
+      - name: Unit tests
+        run: pnpm test
       - name: Static HTML export with Nuxt
         run: pnpm run generate
       - name: Verify static API

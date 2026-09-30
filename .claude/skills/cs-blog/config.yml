@@ -17,6 +17,9 @@ thumbnailStyleRefs:
   - public/images/system_intro_thumbnail.png
   - public/images/exams_thumbnail.png
 
+# 全站配色（示意圖、縮圖主色從這裡取）
+themeFile: app/assets/css/theme.css
+
 # 輸出位置
 contentDir: content/cs
 imageDir: public/images/cs
