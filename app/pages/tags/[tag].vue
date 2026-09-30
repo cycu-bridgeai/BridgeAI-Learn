@@ -19,7 +19,8 @@ const results = computed(() => {
   const combined = [
     ...tagContent.value.blogs.map(b => ({ ...b, type: 'blog' })),
     ...tagContent.value.videos.map(v => ({ ...v, type: 'video' })),
-    ...tagContent.value.works.map(w => ({ ...w, type: 'work' }))
+    ...tagContent.value.works.map(w => ({ ...w, type: 'work' })),
+    ...tagContent.value.cs.map(c => ({ ...c, type: 'cs' }))
   ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
   return combined
@@ -42,7 +43,7 @@ const results = computed(() => {
 
     <div v-if="results.length" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <template v-for="item in results" :key="item.path">
-        <PostCard v-if="item.type === 'blog'" :post="item as any" />
+        <PostCard v-if="item.type === 'blog' || item.type === 'cs'" :post="item as any" />
         <WorkCard v-else-if="item.type === 'work'" :work="item as any" />
         <VideoCard v-else :video="item as any" />
       </template>

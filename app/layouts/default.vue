@@ -40,6 +40,9 @@ function toggleTheme() {
           <NuxtLink to="/blog" class="hidden sm:inline hover:text-blue-600 dark:hover:text-blue-400 transition-colors" active-class="text-blue-600 dark:text-blue-400">
             Blog
           </NuxtLink>
+          <NuxtLink to="/cs" class="hidden sm:inline hover:text-blue-600 dark:hover:text-blue-400 transition-colors" active-class="text-blue-600 dark:text-blue-400">
+            計概
+          </NuxtLink>
           <NuxtLink to="/videos" class="hidden sm:inline hover:text-blue-600 dark:hover:text-blue-400 transition-colors" active-class="text-blue-600 dark:text-blue-400">
             Videos
           </NuxtLink>

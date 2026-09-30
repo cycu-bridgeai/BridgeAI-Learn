@@ -3,6 +3,10 @@ const { data: latestPosts } = await useAsyncData('home-blog', () =>
   queryCollection('blog').order('date', 'DESC').limit(3).all()
 )
 
+const { data: latestCs } = await useAsyncData('home-cs', () =>
+  queryCollection('cs').order('date', 'DESC').limit(3).all()
+)
+
 const { data: latestVideos } = await useAsyncData('home-videos', () =>
   queryCollection('videos').order('date', 'DESC').limit(3).all()
 )
@@ -90,6 +94,22 @@ const { data: latestWorks } = await useAsyncData('home-works', () =>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <PostCard v-for="post in latestPosts" :key="post.path" :post="post" />
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div v-if="latestCs?.length" class="my-12 sm:my-16">
+      <div class="h-1 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent rounded" />
+    </div>
+
+    <!-- Latest CS -->
+    <section v-if="latestCs?.length" class="bg-white dark:bg-gray-900 py-6 sm:py-0">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">計概最新</h2>
+        <NuxtLink to="/cs" class="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-semibold text-xs sm:text-sm rounded-lg hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:scale-105 transition-all duration-300">View all →</NuxtLink>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <PostCard v-for="post in latestCs" :key="post.path" :post="post" />
       </div>
     </section>
 
