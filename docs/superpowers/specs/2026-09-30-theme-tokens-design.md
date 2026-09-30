@@ -141,3 +141,7 @@
 
 - 不 push、不 merge。
 - `.vue` 既有縮排（2 空白）維持；新檔 `.ts`／`.css` 用 Tab；註解中文。
+
+## 狀態紀錄
+
+- 2026-09-30 後續修正：Task 1–5 完成（d515e05 等），測試 20/20、generate、verify-api、verify-cs 全過；待使用者視覺確認。
