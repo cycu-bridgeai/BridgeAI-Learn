@@ -8,6 +8,7 @@ import {
 	sortByDateDesc,
 	toAbsoluteUrl,
 	toArticleItem,
+	toCsItem,
 	toItemResponse,
 	toListResponse,
 	toSiteBase,
@@ -129,4 +130,34 @@ test('renderBrowsePage 連到每個 JSON 並跳脫標題', () => {
 	assert.match(html, /href="videos\/intro-neural-networks\.json"/)
 	assert.match(html, /&lt;b&gt;練習場&lt;\/b&gt;/)
 	assert.doesNotMatch(html, /<b>練習場/)
+})
+
+test('toCsItem 帶 unit 與 unitName，type 為 cs', () => {
+	assert.deepEqual(toCsItem({
+		path: '/cs/scanf-comma-input',
+		title: 'scanf 讀逗點',
+		description: 'd',
+		date: '2026-10-01',
+		tags: ['students'],
+		thumbnail: '/images/cs/scanf-comma-input-thumb.webp',
+		unit: 'io',
+	}, site, '輸入與輸出'), {
+		type: 'cs',
+		slug: 'scanf-comma-input',
+		title: 'scanf 讀逗點',
+		description: 'd',
+		date: '2026-10-01',
+		tags: ['students'],
+		thumbnail: 'https://cycu-bridgeai.github.io/BridgeAI-Learn/images/cs/scanf-comma-input-thumb.webp',
+		url: 'https://cycu-bridgeai.github.io/BridgeAI-Learn/cs/scanf-comma-input',
+		unit: 'io',
+		unitName: '輸入與輸出',
+	})
+})
+
+test('renderBrowsePage 有計概區塊與 cs.json 連結', () => {
+	const html = renderBrowsePage([], [], [{ ...item('scanf-comma-input', '2026-10-01'), type: 'cs' }])
+	assert.match(html, /href="cs\.json"/)
+	assert.match(html, /href="cs\/scanf-comma-input\.json"/)
+	assert.match(html, /計概（1）/)
 })

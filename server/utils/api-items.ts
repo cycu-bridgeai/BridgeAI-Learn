@@ -3,7 +3,7 @@
 export const API_VERSION = 'v1'
 
 export interface ApiItem {
-	type: 'article' | 'video'
+	type: 'article' | 'video' | 'cs'
 	slug: string
 	title: string
 	description: string
@@ -13,6 +13,8 @@ export interface ApiItem {
 	url: string
 	youtubeId?: string
 	youtubeUrl?: string
+	unit?: string
+	unitName?: string
 }
 
 export interface ArticleDoc {
@@ -22,6 +24,10 @@ export interface ArticleDoc {
 	date: string
 	tags?: string[]
 	thumbnail?: string
+}
+
+export interface CsArticleDoc extends ArticleDoc {
+	unit: string
 }
 
 export interface VideoDoc {
@@ -83,6 +89,10 @@ export function toArticleItem(doc: ArticleDoc, site: SiteContext): ApiItem {
 	}
 }
 
+export function toCsItem(doc: CsArticleDoc, site: SiteContext, unitName: string): ApiItem {
+	return { ...toArticleItem(doc, site), type: 'cs', unit: doc.unit, unitName }
+}
+
 export function toVideoItem(doc: VideoDoc, site: SiteContext): ApiItem {
 	return {
 		type: 'video',
@@ -131,7 +141,7 @@ function renderSection(heading: string, folder: string, items: ApiItem[]): strin
 }
 
 // 目錄頁的連結同時讓 Nitro 預渲染器爬到每個單筆 JSON
-export function renderBrowsePage(articles: ApiItem[], videos: ApiItem[]): string {
+export function renderBrowsePage(articles: ApiItem[], videos: ApiItem[], cs: ApiItem[] = []): string {
 	return `<!doctype html>
 <html lang="zh-Hant">
 <head>
@@ -142,12 +152,14 @@ export function renderBrowsePage(articles: ApiItem[], videos: ApiItem[]): string
 <body>
 <h1>BridgeAI Learn API ${API_VERSION}</h1>
 <ul>
-<li><a href="items.json">items.json</a> — 全部文章與影片</li>
+<li><a href="items.json">items.json</a> — 全部文章、影片與計概文章</li>
 <li><a href="articles.json">articles.json</a> — 文章清單</li>
 <li><a href="videos.json">videos.json</a> — 影片清單</li>
+<li><a href="cs.json">cs.json</a> — 計概文章清單</li>
 </ul>
 ${renderSection('文章', 'articles', articles)}
 ${renderSection('影片', 'videos', videos)}
+${renderSection('計概', 'cs', cs)}
 </body>
 </html>
 `

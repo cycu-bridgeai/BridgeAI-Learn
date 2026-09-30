@@ -1,6 +1,6 @@
 # BridgeAI Learn 內容 API（v1）
 
-唯讀、公開、免金鑰。提供部落格文章與影片的摘要和縮圖，給 LINE 機器人等外部程式使用。
+唯讀、公開、免金鑰。提供部落格文章、影片與計概專區文章的摘要和縮圖，給 LINE 機器人等外部程式使用。
 
 - Base URL：`https://cycu-bridgeai.github.io/BridgeAI-Learn/api/v1/`
 - 用瀏覽器打開 Base URL 會看到目錄頁，可以直接點每一篇查看內容。
@@ -10,11 +10,13 @@
 
 | 端點 | 說明 |
 |---|---|
-| `items.json` | 全部文章與影片，依日期新到舊 |
+| `items.json` | 全部文章、影片與計概文章，依日期新到舊 |
 | `articles.json` | 文章清單 |
 | `articles/<slug>.json` | 指定一篇文章 |
 | `videos.json` | 影片清單 |
 | `videos/<slug>.json` | 指定一部影片 |
+| `cs.json` | 計概專區文章清單 |
+| `cs/<slug>.json` | 指定一篇計概文章 |
 
 ## 回應格式
 
@@ -60,11 +62,23 @@
 }
 ```
 
+計概專區文章（`cs.json`、`cs/<slug>.json`）會多兩個欄位：
+
+```json
+{
+  "type": "cs",
+  "slug": "scanf-comma-input",
+  "url": "https://cycu-bridgeai.github.io/BridgeAI-Learn/cs/scanf-comma-input",
+  "unit": "io",
+  "unitName": "輸入與輸出"
+}
+```
+
 ### Item 欄位
 
 | 欄位 | 型別 | 說明 |
 |---|---|---|
-| `type` | `"article"` \| `"video"` | |
+| `type` | `"article"` \| `"video"` \| `"cs"` | `cs` 為計概專區文章 |
 | `slug` | string | 組單筆網址用 |
 | `title` | string | 標題 |
 | `description` | string | 摘要 |
@@ -73,6 +87,7 @@
 | `thumbnail` | string \| null | 完整 https 網址 |
 | `url` | string | 網站上的頁面 |
 | `youtubeId` / `youtubeUrl` | string | 僅影片 |
+| `unit` / `unitName` | string | 僅計概文章；課程單元 id 與中文名稱 |
 
 ## 使用範例
 
@@ -101,5 +116,5 @@ curl -s https://cycu-bridgeai.github.io/BridgeAI-Learn/api/v1/articles.json
 - **更新時機**：網站重新部署時才會更新（main 有新 commit 後約數分鐘）。
 - **不存在的 slug**：回 HTTP 404（內容是網站的 404 頁面，不是 JSON），請先檢查 `res.ok`。
 - **不支援查詢參數**：搜尋、篩選請抓清單後在自己的程式裡做。
-- **相容性承諾**：`v1` 內只會新增欄位，不會改名或刪除；要破壞相容時會開 `v2`。
+- **相容性承諾**：`v1` 內只會新增欄位，不會改名或刪除；要破壞相容時會開 `v2`。`type` 可能出現新值（例如 `cs`），處理 `items.json` 時請忽略不認得的 `type`。
 - slug 可能與原始檔名大小寫不同（例如 `lti_registration`），請一律以 API 回傳的 `slug` 為準。

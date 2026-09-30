@@ -1,4 +1,4 @@
 export default defineEventHandler(async (event) => {
-	const [articles, videos] = await Promise.all([getArticleItems(event), getVideoItems(event)])
-	return toListResponse(sortByDateDesc([...articles, ...videos]), new Date().toISOString())
+	const [articles, videos, cs] = await Promise.all([getArticleItems(event), getVideoItems(event), getCsItems(event)])
+	return toListResponse(sortByDateDesc([...articles, ...videos, ...cs]), new Date().toISOString())
 })
