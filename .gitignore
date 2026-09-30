@@ -50,4 +50,5 @@ BridgeAI-Learn/
 
 .codex/skills/ui-ux-pro-max/
 
-docs/
+docs/*
+!docs/superpowers/
