@@ -21,14 +21,15 @@ dir="$(cd "$(dirname "$src")" && pwd)"
 name="$(basename "$src" .c)"
 cd "$dir" || exit 1
 
-echo "=== 編譯：gcc $name.c -o $name ==="
-if ! gcc "$name.c" -o "$name" 2>&1; then
+# 課程建議的標準編譯指令（環境建立.md §4.2）
+echo "=== 編譯：gcc -Wall -Wextra -std=c11 $name.c -o $name ==="
+warnings="$(gcc -Wall -Wextra -std=c11 "$name.c" -o "$name" 2>&1)"
+if [ $? -ne 0 ]; then
+	echo "$warnings"
 	echo "=== 編譯失敗 ==="
 	exit 3
 fi
-
-warnings="$(gcc -Wall -Wextra -fsyntax-only "$name.c" 2>&1)"
-echo "=== 警告（-Wall -Wextra）==="
+echo "=== 警告 ==="
 if [ -n "$warnings" ]; then
 	echo "$warnings"
 else
