@@ -1,0 +1,83 @@
+# 需求單欄位定義。每個欄位都是單值或清單、沒有巢狀邏輯，日後可直接對應 BridgeAI 平台表單元件。
+# form: 建議的表單元件
+
+slug:
+  required: true
+  type: string
+  pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"
+  form: text
+  note: 英文 kebab-case；同時是檔名 content/cs/<slug>.md 與 API slug，不可與既有 cs 文章重複
+
+unit:
+  required: true
+  type: enum
+  source: content/cs/_units.yml   # 允許值 = units[].id
+  form: select
+
+difficulty:
+  required: true
+  type: enum
+  values:
+    intro: 入門
+    basic: 基礎
+    advanced: 進階
+  form: select
+
+problem:
+  required: true
+  type: string
+  form: textarea
+  note: 學生卡關點，一兩句話；盡量附真實題目或錯誤訊息
+
+sources:
+  required: true
+  type: list
+  min: 1
+  form: repeatable-group
+  item:
+    type:
+      type: enum
+      values:
+        course: 上課資料（courseMaterials 內的檔案）
+        homework: 作業題目
+        screenshot: 截圖
+        note: 使用者口述補充
+      form: select
+    path:
+      type: string
+      form: file-upload
+      note: course 填檔名（相對 courseMaterials）；screenshot／homework 填使用者提供的檔案路徑；note 可留空
+    note:
+      type: string
+      form: text
+      note: 用到哪一段、截圖裡是什麼
+
+voice:
+  required: true
+  type: enum
+  values:
+    ta: 助教對學生說話（預設）
+    senior: 學長姐第一人稱
+    neutral: 中性教學
+    custom: 自訂
+  form: radio
+
+voiceCustom:
+  required: "voice == custom"
+  type: string
+  form: text
+
+audience:
+  required: true
+  type: enum
+  values:
+    students: 學生 → tags 加 students
+    teachers: 老師 → tags 加 teachers
+    both: 兩者 → tags 加 students 與 teachers
+  form: radio
+
+tags:
+  required: false
+  type: list
+  form: tag-input
+  note: 主題 tag（例：c、scanf）；身份 tag 由 audience 自動補上，不用手填
