@@ -1,6 +1,12 @@
 import type { Config } from 'tailwindcss'
 import typography from '@tailwindcss/typography'
 
+// 顏色、字型、圓角、光暈的實際值都在 app/assets/css/theme.css，這裡只做對應
+const themeColors = [
+  'page', 'surface', 'surface-muted', 'header', 'ink', 'ink-muted', 'line', 'section',
+  'blog', 'cs', 'videos', 'works', 'success', 'error', 'warning', 'overlay',
+]
+
 export default {
   darkMode: 'class',
   content: [
@@ -10,13 +16,19 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        serif: ['Georgia', 'ui-serif', 'serif'],
+        sans: ['var(--font-sans)'],
+        mono: ['var(--font-mono)'],
       },
-      colors: {
-        'dark-bg': '#1a1a1a',
-        'dark-card': '#2d2d2d',
-        'dark-border': '#404040',
+      colors: Object.fromEntries(
+        themeColors.map(name => [name, `rgb(var(--color-${name}) / <alpha-value>)`]),
+      ),
+      borderRadius: {
+        chip: 'var(--radius-chip)',
+        card: 'var(--radius-card)',
+        panel: 'var(--radius-panel)',
+      },
+      boxShadow: {
+        glow: 'var(--glow) rgb(var(--color-section) / 0.4)',
       },
       animation: {
         fadeInUp: 'fadeInUp 0.8s ease-out forwards',
@@ -52,27 +64,27 @@ export default {
               fontWeight: 'inherit',
             },
             h2: {
-              color: '#1e293b',
+              color: 'rgb(var(--color-prose-h2))',
               fontWeight: '800',
             },
             h3: {
-              color: '#2563eb',
+              color: 'rgb(var(--color-prose-h3))',
               fontWeight: '700',
             },
             strong: {
-              color: '#059669',
+              color: 'rgb(var(--color-prose-strong))',
             },
             kbd: {
-              backgroundColor: '#f3f4f6',
-              border: '1px solid #d1d5db',
+              backgroundColor: 'rgb(var(--color-surface-muted))',
+              border: '1px solid rgb(var(--color-line))',
               borderRadius: '0.375rem',
               padding: '0.25rem 0.5rem',
-              fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace',
+              fontFamily: 'var(--font-mono)',
               fontSize: '0.875em',
             },
             blockquote: {
               borderLeftWidth: '0',
-              backgroundColor: '#f5f5f5',
+              backgroundColor: 'rgb(var(--color-surface-muted))',
               padding: '0.875rem 1.25rem',
               borderRadius: '0.5rem',
               fontStyle: 'normal',
@@ -80,40 +92,13 @@ export default {
             },
 
             code: {
-              backgroundColor: '#f3f4f6',
+              backgroundColor: 'rgb(var(--color-surface-muted))',
               padding: '0.2rem 0.4rem',
               borderRadius: '0.25rem',
               fontWeight: '600',
             },
-            '.dark code': {
-              backgroundColor: '#1f2937',
-            },
             'code::before': { content: '""' },
             'code::after': { content: '""' },
-          },
-        },
-        invert: {
-          css: {
-            h2: {
-              color: '#f1f5f9',
-              fontWeight: '800',
-            },
-            h3: {
-              color: '#60a5fa',
-              fontWeight: '700',
-            },
-            strong: {
-              color: '#10b981',
-            },
-            kbd: {
-              backgroundColor: '#374151',
-              border: '1px solid #6b7280',
-              color: '#e5e7eb',
-            },
-            blockquote: {
-              backgroundColor: '#2a2a2a',
-              color: 'inherit',
-            },
           },
         },
       },
