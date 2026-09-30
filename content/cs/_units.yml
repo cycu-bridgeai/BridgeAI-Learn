@@ -1,0 +1,19 @@
+units:
+  - id: env-setup
+    name: 環境建立
+    order: 1
+  - id: compile-run
+    name: 編譯與執行
+    order: 2
+  - id: basic-syntax
+    name: 基本架構與語法
+    order: 3
+  - id: io
+    name: 輸入與輸出
+    order: 4
+  - id: ipo
+    name: 邏輯先行與 IPO
+    order: 5
+  - id: pseudocode
+    name: 虛擬碼到程式
+    order: 6

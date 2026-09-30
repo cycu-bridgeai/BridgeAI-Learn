@@ -34,7 +34,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -56,6 +56,8 @@ jobs:
         run: pnpm run generate
       - name: Verify static API
         run: node scripts/verify-api.mjs
+      - name: Verify cs zone
+        run: node scripts/verify-cs.mjs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
