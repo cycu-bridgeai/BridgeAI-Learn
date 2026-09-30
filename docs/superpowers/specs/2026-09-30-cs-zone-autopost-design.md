@@ -28,7 +28,7 @@
 
 `blog` 的 source 是 `blog/**/*.md`，本來就抓不到 `content/cs/`，所以 Blog 列表天然不含 cs 文章；仍以測試鎖住（見 §5）。
 
-> 風險：Nuxt Content 對 `_` 開頭檔案的處理需在實作時實測。若 data collection 讀不到 `_units.yml`，改名為 `units.yml` 前先回報使用者。
+> 已實測（2026-09-30）：data collection 可正常讀到 `cs/_units.yml`。
 
 ### 2.2 單元清單 `content/cs/_units.yml`
 
@@ -58,14 +58,15 @@ units:
 
 ### 2.3 建置前驗證（`unit` 不合法 → 建置失敗）
 
-- 純函式放 `shared/cs.ts`（不依賴 Nuxt，可被 app、server、scripts、`node --test` 共用）：
+- 純函式放 `shared/utils/cs.ts`（Nuxt 4 會自動匯入 app 與 server；不依賴 Nuxt，可被 app、server、scripts、`node --test` 共用）：
 	- `validateUnits(units)`：`id` 唯一、`order` 唯一、欄位齊全。
 	- `validateCsDocs(units, docs)`：每篇 `unit` 必須在清單內；回傳錯誤清單（含檔名與不合法的值）。
 	- `groupCsByUnit(units, docs)`：依 `order` 分組、組內按 `date` 新到舊、空單元不輸出。
 	- `checkCsImages(files)`：`public/images/cs/` 只允許 `.webp`／`.svg`，webp 每張 ≤500KB。
 - `scripts/validate-cs.mjs`：讀 `content/cs/_units.yml`（用 `yaml` 套件，已在 lockfile 內，改為明確宣告 devDependency）與各篇 frontmatter，呼叫上述函式；有錯就印出並 `exit 1`。
-- `package.json` 掛到 `prebuild`、`predev`，並新增 `pregenerate`（CI 跑的是 `pnpm run generate`，目前 `prebuild` 不會被觸發）。
-- 部署 workflow（`deploy-main.yml`）的 Node 由 20 升到 22：驗證腳本要直接 import `shared/cs.ts`，需要 Node 22 的型別剝除；Node 20 也已於 2026-04 停止維護。本機已是 v22.20。
+- `package.json` 的 `dev`、`build`、`generate` 直接串 `node scripts/validate-cs.mjs && nuxt …`（CI 跑的是 `pnpm run generate`，目前 `prebuild` 不會被觸發；pre-script 行為又隨 pnpm 版本設定而異，直接串接最穩）。
+- 部署 workflow 在 `verify-api` 之後加跑 `node scripts/verify-cs.mjs`（§5）。
+- 部署 workflow（`deploy-main.yml`）的 Node 由 20 升到 22：驗證腳本要直接 import `shared/utils/cs.ts`，需要 Node 22 的型別剝除；Node 20 也已於 2026-04 停止維護。本機已是 v22.20。
 
 ### 2.4 頁面
 
