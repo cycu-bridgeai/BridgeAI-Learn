@@ -31,16 +31,8 @@ export default defineContentConfig({
         title: z.string(),
         description: z.string(),
         date: z.string(),
-        unit: z.string(),
         tags: z.array(z.string()).optional(),
         thumbnail: z.string().optional(),
-      }),
-    }),
-    csUnits: defineCollection({
-      type: 'data',
-      source: 'cs/_units.yml',
-      schema: z.object({
-        units: z.array(z.object({ id: z.string(), name: z.string(), order: z.number() })),
       }),
     }),
     works: defineCollection({

@@ -2,7 +2,6 @@
 title: 範例輸入有逗點，scanf 就讀不到？
 description: HW02 PY05 的「168, 62.5」該怎麼讀？把三種寫法實際跑給你看。
 date: 2026-09-30
-unit: io
 thumbnail: /images/cs/scanf-comma-input-thumb.webp
 tags:
   - c
@@ -118,4 +117,4 @@ warning: format ‘%f’ expects argument of type ‘float *’, but argument 3 
 
 ## 還是卡住？
 
-到 [BridgeAI](https://bridgeai.jywglady.org) 打開 AI 助教，把你的程式碼和輸出貼上去問。第一次用的話，可以先看[AI 助教怎麼用](/blog/ai-guidance)。
+到 [BridgeAI](https://bridgeai.jywglady.org) 開啟 AI 問答，把你的程式碼、輸入和輸出貼上去問。想看這個 `scanf` 例子怎麼一步步追問，可以讀[怎麼和 AI 一來一往地除錯](/blog/ai-debugging-questions)。

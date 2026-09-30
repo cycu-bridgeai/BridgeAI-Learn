@@ -24,6 +24,7 @@ defineProps<{
       :src="`https://www.youtube.com/embed/${id}`"
       :title="title || 'YouTube video'"
       class="w-full h-full"
+      loading="lazy"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen

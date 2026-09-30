@@ -29,12 +29,8 @@ export async function getVideoItems(event: H3Event): Promise<ApiItem[]> {
 
 export async function getCsItems(event: H3Event): Promise<ApiItem[]> {
 	const site = getSiteContext(event)
-	const [unitsDoc, docs] = await Promise.all([
-		queryCollection(event, 'csUnits').first(),
-		queryCollection(event, 'cs')
-			.select('path', 'title', 'description', 'date', 'tags', 'thumbnail', 'unit')
-			.all(),
-	])
-	const units = unitsDoc?.units ?? []
-	return sortByDateDesc(docs.map(doc => toCsItem(doc, site, unitNameOf(units, doc.unit) ?? doc.unit)))
+	const docs = await queryCollection(event, 'cs')
+		.select('path', 'title', 'description', 'date', 'tags', 'thumbnail')
+		.all()
+	return sortByDateDesc(docs.map(doc => toCsItem(doc, site)))
 }

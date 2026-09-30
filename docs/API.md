@@ -62,15 +62,14 @@
 }
 ```
 
-計概專區文章（`cs.json`、`cs/<slug>.json`）會多兩個欄位：
+計概專區文章（`cs.json`、`cs/<slug>.json`）以 `type: "cs"` 識別，分類使用共通的 `tags` 欄位：
 
 ```json
 {
   "type": "cs",
   "slug": "scanf-comma-input",
-  "url": "https://cycu-bridgeai.github.io/BridgeAI-Learn/cs/scanf-comma-input",
-  "unit": "io",
-  "unitName": "輸入與輸出"
+  "tags": ["c", "scanf", "students"],
+  "url": "https://cycu-bridgeai.github.io/BridgeAI-Learn/cs/scanf-comma-input"
 }
 ```
 
@@ -87,7 +86,6 @@
 | `thumbnail` | string \| null | 完整 https 網址 |
 | `url` | string | 網站上的頁面 |
 | `youtubeId` / `youtubeUrl` | string | 僅影片 |
-| `unit` / `unitName` | string | 僅計概文章；課程單元 id 與中文名稱 |
 
 ## 使用範例
 

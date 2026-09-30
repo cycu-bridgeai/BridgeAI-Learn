@@ -13,8 +13,6 @@ export interface ApiItem {
 	url: string
 	youtubeId?: string
 	youtubeUrl?: string
-	unit?: string
-	unitName?: string
 }
 
 export interface ArticleDoc {
@@ -24,10 +22,6 @@ export interface ArticleDoc {
 	date: string
 	tags?: string[]
 	thumbnail?: string
-}
-
-export interface CsArticleDoc extends ArticleDoc {
-	unit: string
 }
 
 export interface VideoDoc {
@@ -89,8 +83,8 @@ export function toArticleItem(doc: ArticleDoc, site: SiteContext): ApiItem {
 	}
 }
 
-export function toCsItem(doc: CsArticleDoc, site: SiteContext, unitName: string): ApiItem {
-	return { ...toArticleItem(doc, site), type: 'cs', unit: doc.unit, unitName }
+export function toCsItem(doc: ArticleDoc, site: SiteContext): ApiItem {
+	return { ...toArticleItem(doc, site), type: 'cs' }
 }
 
 export function toVideoItem(doc: VideoDoc, site: SiteContext): ApiItem {

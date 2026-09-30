@@ -1,9 +1,8 @@
-// 驗證 generate 產出的計概專區頁面：Blog 列表排除 cs、tag 頁包含 cs、/cs 依單元順序分組，CI 部署前執行
+// 驗證 generate 產出的計概專區頁面：Blog 列表排除 cs、tag 頁包含 cs、/cs 有 tag 篩選，CI 部署前執行
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parse } from 'yaml'
-import { groupCsByUnit } from '../shared/utils/cs.ts'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const out = path.join(root, process.argv[2] ?? '.output/public')
@@ -32,7 +31,6 @@ function escapeHtml(text) {
 		.replace(/"/g, '&quot;')
 }
 
-const units = parse(fs.readFileSync(path.join(csDir, '_units.yml'), 'utf8')).units
 const docs = fs.readdirSync(csDir)
 	.filter(file => file.endsWith('.md'))
 	.map((file) => {
@@ -52,9 +50,9 @@ for (const doc of docs) {
 		check(readPage(`tags/${tag}`).includes(doc.html), `/tags/${tag} 缺 cs 文章：${doc.title}`)
 }
 
-const positions = groupCsByUnit(units, docs).map(group => csPage.indexOf(`>${escapeHtml(group.unit.name)}<`))
-check(positions.every(p => p >= 0), '/cs 缺單元標題')
-check(positions.every((p, i) => i === 0 || positions[i - 1] < p), '/cs 單元順序與 _units.yml 不符')
+// /cs 的 tag 篩選：每個 tag 至少出現兩次（篩選按鈕＋卡片上的 tag）
+for (const tag of new Set(docs.flatMap(doc => doc.tags ?? [])))
+	check(csPage.split(`#${escapeHtml(tag)}`).length - 1 >= 2, `/cs 缺 tag 篩選按鈕：#${tag}`)
 
 const newest = [...docs].sort((a, b) => b.date.localeCompare(a.date))[0]
 if (newest)

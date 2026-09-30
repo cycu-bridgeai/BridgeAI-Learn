@@ -5,7 +5,10 @@ courseMaterials: /mnt/c/Users/pjw92/Desktop/計概課程資料/
 
 # 「還是卡住？」段落的連結
 assistantUrl: https://bridgeai.jywglady.org   # BridgeAI 平台正式站（平台 repo 的 FRONTEND_BASE_URL）
-assistantGuide: /blog/ai-guidance              # 本站 AI 助教使用說明
+assistantGuide: /blog/ai-debugging-questions   # 本站問答式除錯說明
+
+# 每篇計概文章在大綱階段都要檢查是否有對題的課堂影片
+courseVideoChannel: https://www.youtube.com/channel/UCR8pxSRgz2rNXM5XXOISacQ
 
 # 程式碼實測
 gccMajor: 13
@@ -23,4 +26,3 @@ themeFile: app/assets/css/theme.css
 # 輸出位置
 contentDir: content/cs
 imageDir: public/images/cs
-unitsFile: content/cs/_units.yml

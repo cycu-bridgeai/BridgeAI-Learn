@@ -44,10 +44,6 @@ function checkItem(item, type, where) {
 		check(typeof item.youtubeId === 'string' && item.youtubeId.length > 0, `${where}: youtubeId 缺值`)
 		check(item.youtubeUrl === `https://www.youtube.com/watch?v=${item.youtubeId}`, `${where}: youtubeUrl 錯誤`)
 	}
-	if (type === 'cs') {
-		check(typeof item.unit === 'string' && item.unit.length > 0, `${where}: unit 缺值`)
-		check(typeof item.unitName === 'string' && item.unitName.length > 0, `${where}: unitName 缺值`)
-	}
 }
 
 function checkList(rel, type, folder, expectedCount) {

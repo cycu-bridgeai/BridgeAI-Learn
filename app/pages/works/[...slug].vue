@@ -228,19 +228,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <aside
-    v-if="work && tocLinks.length"
-    class="section-works group fixed bottom-0 left-0 top-16 z-20 hidden w-72 -translate-x-60 transition-transform duration-200 ease-out hover:translate-x-0 focus-within:translate-x-0 xl:block"
-  >
-    <div class="relative h-full border-r border-line bg-page/95 py-6 pl-5 pr-14 shadow-lg shadow-ink/10 backdrop-blur">
-      <div class="h-full overflow-y-auto pr-2">
-        <Sidebar :links="tocLinks" title="目錄" />
-      </div>
-      <div class="absolute right-0 top-6 flex h-28 w-12 items-center justify-center rounded-r-lg border border-l-0 border-line bg-page text-xs font-bold tracking-widest text-ink-muted shadow-sm transition-colors group-hover:text-section">
-        <span class="[writing-mode:vertical-rl]">目錄</span>
-      </div>
-    </div>
-  </aside>
+  <TocDrawer v-if="work && tocLinks.length" :links="tocLinks" section="works" />
 
   <article v-if="work" class="section-works relative left-1/2 w-screen -translate-x-1/2 px-4 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-[52rem]">
@@ -300,11 +288,6 @@ onMounted(() => {
               />
             </div>
           </div>
-
-          <details v-if="tocLinks.length" class="mt-6 rounded-card border border-line bg-surface-muted p-4 shadow-sm xl:hidden">
-            <summary class="cursor-pointer text-sm font-bold text-ink">文章目錄</summary>
-            <Sidebar :links="tocLinks" title="" class="mt-3" />
-          </details>
 
           <img v-if="thumbnailSrc" :src="thumbnailSrc" :alt="work.title" class="w-full rounded-panel object-cover mt-6" />
         </header>

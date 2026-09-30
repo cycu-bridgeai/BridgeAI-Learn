@@ -2,7 +2,6 @@
 title: <標題，學生搜尋會用的說法>
 description: <一句話摘要，說明看完能解決什麼>
 date: <YYYY-MM-DD>
-unit: <units[].id>
 thumbnail: /images/cs/<slug>-thumb.webp
 tags:
   - <主題 tag>
@@ -41,6 +40,13 @@ tags:
 ```
 
 **輸入** `<…>` → **輸出** `<…>`
+
+<!-- 若大綱核可了對題的課堂影片，放在最相關段落；沒有就刪除這段。只核對標題時，不敘述影片內容。 -->
+
+**老師的相關影片：**〈[<片名>](https://www.youtube.com/watch?v=<影片 ID>)〉。
+
+::youtube-embed{id="<影片 ID>" title="<片名>"}
+::
 
 ## 常見陷阱
 

@@ -132,7 +132,7 @@ test('renderBrowsePage 連到每個 JSON 並跳脫標題', () => {
 	assert.doesNotMatch(html, /<b>練習場/)
 })
 
-test('toCsItem 帶 unit 與 unitName，type 為 cs', () => {
+test('toCsItem 的 type 為 cs，不帶 unit 欄位', () => {
 	assert.deepEqual(toCsItem({
 		path: '/cs/scanf-comma-input',
 		title: 'scanf 讀逗點',
@@ -140,8 +140,7 @@ test('toCsItem 帶 unit 與 unitName，type 為 cs', () => {
 		date: '2026-10-01',
 		tags: ['students'],
 		thumbnail: '/images/cs/scanf-comma-input-thumb.webp',
-		unit: 'io',
-	}, site, '輸入與輸出'), {
+	}, site), {
 		type: 'cs',
 		slug: 'scanf-comma-input',
 		title: 'scanf 讀逗點',
@@ -150,8 +149,6 @@ test('toCsItem 帶 unit 與 unitName，type 為 cs', () => {
 		tags: ['students'],
 		thumbnail: 'https://cycu-bridgeai.github.io/BridgeAI-Learn/images/cs/scanf-comma-input-thumb.webp',
 		url: 'https://cycu-bridgeai.github.io/BridgeAI-Learn/cs/scanf-comma-input',
-		unit: 'io',
-		unitName: '輸入與輸出',
 	})
 })
 

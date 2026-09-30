@@ -1,6 +1,6 @@
 ---
 name: cs-blog
-description: 把「學生上課卡關點」＋截圖／上課資料做成計概專區文章（content/cs）與縮圖。每篇走需求單→口吻→大綱→實測全文→縮圖→落檔六步，程式碼一律 gcc 13 實測。觸發：使用者說「/cs-blog」「寫計概文章」「這週的卡關點」「學生卡在…幫我寫一篇」，或丟來計概上課截圖要出文時。
+description: 把「學生上課卡關點」＋截圖／上課資料做成計概專區文章（content/cs）與縮圖。每篇走需求單→口吻→大綱（含課堂影片配對）→實測全文→縮圖→落檔六步，程式碼一律 gcc 13 實測。觸發：使用者說「/cs-blog」「寫計概文章」「這週的卡關點」「學生卡在…幫我寫一篇」，或丟來計概上課截圖要出文時。
 ---
 
 # /cs-blog：計概卡關點出文
@@ -10,18 +10,18 @@ description: 把「學生上課卡關點」＋截圖／上課資料做成計概�
 ## 鐵則
 
 - **文章內容只能來自需求單 `sources` 與實測結果。** 資料沒寫、沒測過的說法不寫；想補充就先問使用者。
+- 課堂影片只作為相關學習資源。僅憑標題可以判斷主題是否對應，不能據此聲稱影片講了哪些步驟或結論；要描述影片內容，先實際核對影片或字幕。
 - **上課資料與實測結果矛盾 → 停下問使用者**，列出兩邊說法與實測輸出，不自行裁決。
 - 每步需要使用者確認的地方，**等到確認才往下**。
 - 不 push、不 merge。commit message 只在使用者審稿通過後提供。
 
 ## 步驟 1：需求單
 
-1. 讀 `request.schema.yml` 與 `content/cs/_units.yml`。
+1. 讀 `request.schema.yml`；分類使用文章的 `tags`，不使用課程單元。
 2. 把使用者描述整理成 YAML（欄位與允許值照 schema；`voice` 先填 `ta`，步驟 2 再定）：
 
    ```yaml
    slug: scanf-comma-input
-   unit: io
    difficulty: basic
    problem: >
      HW02 PY05 BMI 範例輸入是「168, 62.5」，照課堂的空白分隔寫法讀不到正確值。
@@ -35,7 +35,7 @@ description: 把「學生上課卡關點」＋截圖／上課資料做成計概�
    tags: [c, scanf]
    ```
 
-3. 自查：`unit` 在 `_units.yml` 內；`slug` 符合 pattern 且 `content/cs/<slug>.md` 不存在；`sources` 至少一項且檔案讀得到。
+3. 自查：`slug` 符合 pattern 且 `content/cs/<slug>.md` 不存在；`sources` 至少一項且檔案讀得到；`tags` 至少有一個主題標籤。
 4. 給使用者看，**確認後**才往下。
 
 ## 步驟 2：口吻
@@ -52,10 +52,11 @@ description: 把「學生上課卡關點」＋截圖／上課資料做成計概�
 ## 步驟 3：大綱
 
 1. 讀 `sources` 裡的每份資料（上課資料在 `config.yml` 的 `courseMaterials`；PDF 用 Read 的 `pages` 參數讀相關頁）。
-2. 照 `templates/outline.md` 填六段：情境開場 → 為什麼（原理＋示意圖）→ 解法（實測程式碼）→ 延伸變形 → 自我檢查 → 還是卡住？
-3. 每個論點標出處（哪份資料哪一段，或「待實測」）。
-4. 列出已有截圖與缺的截圖。
-5. 給使用者看，**核可後**才寫全文。
+2. 查看 `config.yml` 的 `courseVideoChannel`，搜尋這篇卡關點對應的老師影片。逐一核對影片標題與文章要解決的問題；能看影片或字幕時再核對實際內容。若選到影片，在大綱記下標題、影片網址、為何對題、預計放在哪一段、核對程度（標題／影片或字幕）；每篇最多一支。若沒有對題影片，明記「目前沒有合適影片」，不硬塞。若頻道暫時無法讀取，標記「待查」，在落檔前重試或如實回報，不能把未查當成沒有。
+3. 照 `templates/outline.md` 填六段：情境開場 → 為什麼（原理＋示意圖）→ 解法（實測程式碼）→ 延伸變形 → 自我檢查 → 還是卡住？
+4. 每個論點標出處（哪份資料哪一段，或「待實測」）。
+5. 列出已有截圖與缺的截圖。
+6. 給使用者看（包含影片配對結果），**核可後**才寫全文。
 
 ## 步驟 4：全文
 
@@ -134,6 +135,7 @@ description: 把「學生上課卡關點」＋截圖／上課資料做成計概�
   - 「格式對輸入」這類逐字對照，用 `text` 區塊等寬排版：行首只放 ASCII、中文說明寫在區塊外，避免中文字寬破壞對齊。
   - 示意圖（4.2）只畫不含程式碼的概念圖；能用表格或 `text` 區塊講清楚就不畫。
 - 「還是卡住？」段落用 `config.yml` 的 `assistantUrl` 與 `assistantGuide`。
+- 大綱選到對題課堂影片時，把影片放在最相關的段落，標明片名並附 YouTube 原片連結；可用 `::youtube-embed{id="影片 ID" title="片名"}` 嵌入。只核對標題時，僅介紹它的主題，不推測影片內容；沒有對題影片就不放影片區塊。
 - 身份 tag 依 `audience` 自動補上（`students`／`teachers`／兩者）。
 
 ## 步驟 5：縮圖
@@ -159,9 +161,10 @@ description: 把「學生上課卡關點」＋截圖／上課資料做成計概�
 
 ## 步驟 6：落檔
 
-1. 寫入 `content/cs/<slug>.md`（frontmatter 含 `unit` 與 `thumbnail: /images/cs/<slug>-thumb.webp`）。
+1. 寫入 `content/cs/<slug>.md`（frontmatter 含主題與身份 `tags`，以及 `thumbnail: /images/cs/<slug>-thumb.webp`）。
 2. 檢查 tags 含身份標籤（學生視角必含 `students`，本 repo `CLAUDE.md` 規則）。
-3. 跑驗證，**全部要過**：
+3. 對照核可的大綱檢查影片：有對題影片則片名、原片網址、嵌入 ID 都一致；沒有則不放影片。若大綱標「待查」，重查並記錄結果後再請使用者確認。
+4. 跑驗證，**全部要過**：
 
    ```bash
    pnpm run generate
@@ -169,16 +172,16 @@ description: 把「學生上課卡關點」＋截圖／上課資料做成計概�
    node scripts/verify-cs.mjs
    ```
 
-   `generate` 會先跑 `scripts/validate-cs.mjs`：`unit` 不合法、`public/images/cs/` 有非 webp／svg 或超過 500KB 的圖，建置直接失敗。
-4. 若 `content/cs/fixture-cs-demo.md` 還在，刪掉（開發用 fixture）。
-5. 檢查佔位：
+   `generate` 會先跑 `scripts/validate-cs.mjs`：`public/images/cs/` 有非 webp／svg 或超過 500KB 的圖，建置直接失敗。
+5. 若 `content/cs/fixture-cs-demo.md` 還在，刪掉（開發用 fixture）。
+6. 檢查佔位：
 
    ```bash
    grep -n "TODO-SCREENSHOT" content/cs/<slug>.md
    ```
 
    有結果 → **不能 commit**，把截圖清單交給使用者，等補圖後回到 4.3。
-6. 請使用者審稿。通過後先呼叫 `sync-docs`，再提供 commit message（只給訊息，不自行 push）。
+7. 請使用者審稿。通過後先呼叫 `sync-docs`，再提供 commit message（只給訊息，不自行 push）。
 
 ## 停止條件總表
 
@@ -187,5 +190,5 @@ description: 把「學生上課卡關點」＋截圖／上課資料做成計概�
 | 上課資料與實測結果矛盾 | 停，列兩邊說法＋實測輸出，問使用者 |
 | 縮圖重生 3 次仍有錯字 | 停，交使用者決定 |
 | 文章含 `TODO-SCREENSHOT` | 不可 commit |
-| `pnpm run generate` 失敗或 `unit` 不合法 | 不能往下 |
+| `pnpm run generate` 失敗 | 不能往下 |
 | `verify-api`／`verify-cs` 失敗 | 不能往下 |

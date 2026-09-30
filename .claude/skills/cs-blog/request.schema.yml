@@ -8,12 +8,6 @@ slug:
   form: text
   note: 英文 kebab-case；同時是檔名 content/cs/<slug>.md 與 API slug，不可與既有 cs 文章重複
 
-unit:
-  required: true
-  type: enum
-  source: content/cs/_units.yml   # 允許值 = units[].id
-  form: select
-
 difficulty:
   required: true
   type: enum
@@ -77,7 +71,8 @@ audience:
   form: radio
 
 tags:
-  required: false
+  required: true
   type: list
+  min: 1
   form: tag-input
-  note: 主題 tag（例：c、scanf）；身份 tag 由 audience 自動補上，不用手填
+  note: 至少一個主題 tag（例：c、scanf）；身份 tag 由 audience 自動補上，不用手填

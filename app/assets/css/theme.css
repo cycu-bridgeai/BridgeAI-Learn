@@ -27,6 +27,9 @@
 	--color-prose-h3: 37 99 235;        /* 文章 h3 */
 	--color-prose-strong: 5 150 105;    /* 文章粗體 */
 	--color-prose-img-border: 17 17 17; /* 文章圖片外框 */
+	--color-code-surface: 246 248 250;  /* 亮色程式區塊 */
+	--color-code-ink: 36 41 47;         /* 未上色的程式文字 */
+	--color-code-line: 208 215 222;    /* 程式區塊邊線 */
 	--color-overlay: 0 0 0;             /* 圖片放大時的遮罩 */
 
 	/* ── 字型 ── */
@@ -66,6 +69,9 @@
 	--color-prose-h3: 96 165 250;
 	--color-prose-strong: 16 185 129;
 	--color-prose-img-border: 85 85 85;
+	--color-code-surface: 13 17 23;
+	--color-code-ink: 201 209 217;
+	--color-code-line: 48 54 61;
 
 	--color-section: var(--color-blog);
 }
