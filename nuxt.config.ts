@@ -6,6 +6,22 @@ export default defineNuxtConfig({
     baseURL,
     head: {
       link: [{ rel: 'icon', type: 'image/x-icon', href: `${baseURL}favicon.ico` }],
+      script: process.env.NODE_ENV === 'production' ? [
+        {
+          key: 'google-analytics-loader',
+          async: true,
+          src: 'https://www.googletagmanager.com/gtag/js?id=G-BE8TKLE6HK',
+        },
+        {
+          key: 'google-analytics-config',
+          innerHTML: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-BE8TKLE6HK');
+          `,
+        },
+      ] : [],
     },
   },
   css: ['~/assets/css/theme.css', '~/assets/css/main.css'],
