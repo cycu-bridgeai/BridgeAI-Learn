@@ -37,12 +37,13 @@ scanf("%f", &x);     /* double 要用 %lf */
 
 **輸入** `3.14` → **輸出** `x = 0.000000`
 
-`%f` 是給 `float` 用的，`double` 要用 `%lf`。printf 印 `double` 寫 `%f` 沒問題，但 scanf 不行。編譯器也有提醒，最後一行甚至直接告訴你答案：
+`%f` 是給 `float` 用的，`double` 要用 `%lf`。printf 印 `double` 寫 `%f` 沒問題，但 scanf 不行。編譯器也有提醒：
 
 ```text
 warning: format ‘%f’ expects argument of type ‘float *’, but argument 2 has type ‘double *’ [-Wformat=]
-      |            %lf
 ```
+
+gcc 在這行警告下面，還會直接提示你改成 `%lf`。
 
 **改法**：`scanf("%lf", &x);`
 

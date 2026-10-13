@@ -67,3 +67,16 @@
 .prose tr:nth-child(even) {
 	background-color: rgb(var(--color-surface-muted) / 0.6);
 }
+
+/* 勾選清單（- [ ]）只留勾選框，不顯示項目符號 */
+.prose ul.contains-task-list {
+	list-style: none;
+	padding-left: 0;
+}
+.prose li.task-list-item {
+	padding-left: 0;
+}
+.prose li.task-list-item input[type="checkbox"] {
+	margin: 0 0.5rem 0 0;
+	vertical-align: middle;
+}
