@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 384" width="800" height="384" role="img" aria-labelledby="return-fail-fast-vs-summary-diagram-01-title return-fail-fast-vs-summary-diagram-01-desc">
+	<title id="return-fail-fast-vs-summary-diagram-01-title">一票否決與總結清算的出口位置</title>
+	<desc id="return-fail-fast-vs-summary-diagram-01-desc">一票否決的迴圈在找到整除時就能中途 return 0，跑完才 return 1；總結清算的迴圈裡沒有出口，只有全部跑完才 return sum。</desc>
+	<defs>
+		<marker id="rfs-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+			<polygon points="0 0, 8 3, 0 6" fill="#6B7280"/>
+		</marker>
+		<marker id="rfs-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+			<polygon points="0 0, 8 3, 0 6" fill="#059669"/>
+		</marker>
+	</defs>
+	<rect width="100%" height="100%" fill="#FFFFFF"/>
+
+	<g font-family="'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif" text-anchor="middle">
+		<!-- 欄標題 -->
+		<text x="170" y="36" fill="#111827" font-size="16" font-weight="600">一票否決</text>
+		<text x="170" y="56" fill="#6B7280" font-size="12">例：判斷質數</text>
+		<text x="570" y="36" fill="#111827" font-size="16" font-weight="600">總結清算</text>
+		<text x="570" y="56" fill="#6B7280" font-size="12">例：因數總和</text>
+
+		<!-- 左欄連線 -->
+		<line x1="170" y1="116" x2="170" y2="142" stroke="#6B7280" stroke-width="1.2" marker-end="url(#rfs-arrow)"/>
+		<path d="M114 176 H44 Q36 176 36 168 V102 Q36 94 44 94 H58" fill="none" stroke="#6B7280" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#rfs-arrow)"/>
+		<line x1="170" y1="208" x2="170" y2="242" stroke="#059669" stroke-width="1.6" marker-end="url(#rfs-arrow-accent)"/>
+		<path d="M280 94 H308 Q316 94 316 102 V328 Q316 336 308 336 H262" fill="none" stroke="#6B7280" stroke-width="1.2" marker-end="url(#rfs-arrow)"/>
+
+		<!-- 左欄連線標籤 -->
+		<rect x="44" y="152" width="68" height="16" rx="2" fill="#FFFFFF"/>
+		<text x="78" y="164" fill="#6B7280" font-size="12" font-weight="500">否：下一輪</text>
+		<rect x="178" y="218" width="20" height="16" rx="2" fill="#FFFFFF"/>
+		<text x="188" y="230" fill="#059669" font-size="12" font-weight="500">是</text>
+		<rect x="324" y="208" width="56" height="16" rx="2" fill="#FFFFFF"/>
+		<text x="352" y="220" fill="#6B7280" font-size="12" font-weight="500">全部跑完</text>
+
+		<!-- 左欄節點 -->
+		<rect x="60" y="72" width="220" height="44" rx="6" fill="#FFFFFF" stroke="#111827" stroke-width="1"/>
+		<text x="170" y="99" fill="#111827" font-size="13" font-weight="600">for：每一輪看一個 i</text>
+		<polygon points="170,144 226,176 170,208 114,176" fill="#FFFFFF" stroke="#111827" stroke-width="1"/>
+		<text x="170" y="181" fill="#111827" font-size="12" font-weight="600">能整除？</text>
+		<rect x="80" y="244" width="180" height="40" rx="20" fill="#EBF7F3" stroke="#059669" stroke-width="1.2"/>
+		<text x="170" y="269" fill="#111827" font-size="13" font-weight="600">return 0：馬上結束</text>
+		<rect x="80" y="316" width="180" height="40" rx="20" fill="#FFFFFF" stroke="#111827" stroke-width="1"/>
+		<text x="170" y="341" fill="#111827" font-size="13" font-weight="600">return 1：是質數</text>
+
+		<!-- 右欄連線 -->
+		<line x1="570" y1="116" x2="570" y2="150" stroke="#6B7280" stroke-width="1.2" marker-end="url(#rfs-arrow)"/>
+		<path d="M460 174 H444 Q436 174 436 166 V102 Q436 94 444 94 H458" fill="none" stroke="#6B7280" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#rfs-arrow)"/>
+		<path d="M680 94 H708 Q716 94 716 102 V328 Q716 336 708 336 H662" fill="none" stroke="#059669" stroke-width="1.6" marker-end="url(#rfs-arrow-accent)"/>
+
+		<!-- 右欄連線標籤 -->
+		<rect x="384" y="126" width="44" height="16" rx="2" fill="#FFFFFF"/>
+		<text x="406" y="138" fill="#6B7280" font-size="12" font-weight="500">下一輪</text>
+		<rect x="724" y="208" width="56" height="16" rx="2" fill="#FFFFFF"/>
+		<text x="752" y="220" fill="#059669" font-size="12" font-weight="500">全部跑完</text>
+
+		<!-- 右欄節點 -->
+		<rect x="460" y="72" width="220" height="44" rx="6" fill="#FFFFFF" stroke="#111827" stroke-width="1"/>
+		<text x="570" y="99" fill="#111827" font-size="13" font-weight="600">for：每一輪看一個 i</text>
+		<rect x="460" y="152" width="220" height="44" rx="6" fill="#FFFFFF" stroke="#111827" stroke-width="1"/>
+		<text x="570" y="179" fill="#111827" font-size="13" font-weight="600">能整除就 sum += i</text>
+		<text x="570" y="240" fill="#6B7280" font-size="12">迴圈裡沒有任何出口</text>
+		<rect x="480" y="316" width="180" height="40" rx="20" fill="#EBF7F3" stroke="#059669" stroke-width="1.2"/>
+		<text x="570" y="341" fill="#111827" font-size="13" font-weight="600">return sum：交出總和</text>
+	</g>
+</svg>
