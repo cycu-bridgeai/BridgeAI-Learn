@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="800" height="360" role="img" aria-labelledby="rbt-title rbt-desc">
+	<title id="rbt-title">遞迴的去程展開與回程計算</title>
+	<desc id="rbt-desc">sum(4) 到 sum(2) 在去程時都停在加法前等待下一層結果；直到 sum(1) 回傳 1 後，回程才依序把 1+2=3、3+3=6、6+4=10 算完交回。</desc>
+	<defs>
+		<marker id="rbt-arrow-gray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+			<polygon points="0 0, 8 3, 0 6" fill="#6B7280"/>
+		</marker>
+		<marker id="rbt-arrow-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+			<polygon points="0 0, 8 3, 0 6" fill="#059669"/>
+		</marker>
+	</defs>
+	<rect width="100%" height="100%" fill="#FFFFFF"/>
+
+	<g font-family="'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif" text-anchor="middle">
+		<!-- 欄標題 -->
+		<text x="200" y="34" fill="#111827" font-size="16" font-weight="600">去程：往下問（先卡住等答案）</text>
+		<text x="600" y="34" fill="#059669" font-size="16" font-weight="600">回程：往上算（拿到答案才加）</text>
+
+		<!-- 左欄：去程 -->
+		<rect x="65" y="54" width="270" height="44" rx="6" fill="#FFFFFF" stroke="#111827" stroke-width="1.2"/>
+		<text x="200" y="81" fill="#111827" font-size="13" font-weight="600">sum(4)：等 sum(3) 回來 + 4</text>
+
+		<line x1="200" y1="98" x2="200" y2="124" stroke="#6B7280" stroke-width="1.3" marker-end="url(#rbt-arrow-gray)"/>
+
+		<rect x="65" y="126" width="270" height="44" rx="6" fill="#FFFFFF" stroke="#111827" stroke-width="1.2"/>
+		<text x="200" y="153" fill="#111827" font-size="13" font-weight="600">sum(3)：等 sum(2) 回來 + 3</text>
+
+		<line x1="200" y1="170" x2="200" y2="196" stroke="#6B7280" stroke-width="1.3" marker-end="url(#rbt-arrow-gray)"/>
+
+		<rect x="65" y="198" width="270" height="44" rx="6" fill="#FFFFFF" stroke="#111827" stroke-width="1.2"/>
+		<text x="200" y="225" fill="#111827" font-size="13" font-weight="600">sum(2)：等 sum(1) 回來 + 2</text>
+
+		<!-- 向下彎進終止條件卡片 -->
+		<path d="M200 242 Q200 264 238 272" fill="none" stroke="#059669" stroke-width="1.6" marker-end="url(#rbt-arrow-green)"/>
+
+		<!-- 最底層：Base Case 跨越左右 -->
+		<rect x="170" y="274" width="460" height="48" rx="24" fill="#EBF7F3" stroke="#059669" stroke-width="1.6"/>
+		<text x="400" y="303" fill="#059669" font-size="14" font-weight="700">終止條件 sum(1) 直接交出 1</text>
+
+		<!-- 右欄：回程（由下往上） -->
+		<path d="M562 274 Q600 264 600 246" fill="none" stroke="#059669" stroke-width="1.6" marker-end="url(#rbt-arrow-green)"/>
+
+		<rect x="465" y="198" width="270" height="44" rx="6" fill="#EBF7F3" stroke="#059669" stroke-width="1.2"/>
+		<text x="600" y="225" fill="#111827" font-size="13" font-weight="600">sum(2)：算出 1 + 2 → 回傳 3</text>
+
+		<line x1="600" y1="198" x2="600" y2="172" stroke="#059669" stroke-width="1.6" marker-end="url(#rbt-arrow-green)"/>
+
+		<rect x="465" y="126" width="270" height="44" rx="6" fill="#EBF7F3" stroke="#059669" stroke-width="1.2"/>
+		<text x="600" y="153" fill="#111827" font-size="13" font-weight="600">sum(3)：算出 3 + 3 → 回傳 6</text>
+
+		<line x1="600" y1="126" x2="600" y2="100" stroke="#059669" stroke-width="1.6" marker-end="url(#rbt-arrow-green)"/>
+
+		<rect x="465" y="54" width="270" height="44" rx="6" fill="#EBF7F3" stroke="#059669" stroke-width="1.6"/>
+		<text x="600" y="81" fill="#059669" font-size="14" font-weight="700">sum(4)：算出 6 + 4 → 回傳 10</text>
+	</g>
+</svg>

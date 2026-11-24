@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" width="800" height="320" role="img" aria-labelledby="pbd-title pbd-desc">
+	<title id="pbd-title">變數的值、位址與指標的關係</title>
+	<desc id="pbd-desc">offset 是存放整數 5 的變數盒子，&amp;offset 取得它的位址 0x100；指標 p 存著 0x100，透過 *p 可以沿著位址讀寫 offset 裡的值。</desc>
+	<defs>
+		<marker id="pbd-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+			<polygon points="0 0, 8 3, 0 6" fill="#6B7280"/>
+		</marker>
+		<marker id="pbd-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+			<polygon points="0 0, 8 3, 0 6" fill="#059669"/>
+		</marker>
+	</defs>
+	<rect width="100%" height="100%" fill="#FFFFFF"/>
+
+	<g font-family="'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif" text-anchor="middle">
+		<!-- 標題 -->
+		<text x="200" y="42" fill="#111827" font-size="16" font-weight="600">整數變數（裝數字）</text>
+		<text x="600" y="42" fill="#111827" font-size="16" font-weight="600">指標變數（裝位址）</text>
+
+		<!-- 左：offset 盒子 -->
+		<text x="200" y="84" fill="#6B7280" font-size="13">門牌位址：0x100（例）</text>
+		<rect x="110" y="96" width="180" height="84" rx="8" fill="#FFFFFF" stroke="#111827" stroke-width="1.4"/>
+		<text x="200" y="124" fill="#6B7280" font-size="13" font-weight="500">offset</text>
+		<text x="200" y="160" fill="#111827" font-size="24" font-weight="700">5 → 8</text>
+
+		<!-- 右：p 盒子 -->
+		<text x="600" y="84" fill="#6B7280" font-size="13">門牌位址：0x200（例）</text>
+		<rect x="510" y="96" width="180" height="84" rx="8" fill="#EBF7F3" stroke="#059669" stroke-width="1.4"/>
+		<text x="600" y="124" fill="#059669" font-size="13" font-weight="600">指標 p</text>
+		<text x="600" y="160" fill="#111827" font-size="22" font-weight="700">0x100</text>
+
+		<!-- 上方連線：&offset 存進 p -->
+		<path d="M294 116 H502" fill="none" stroke="#6B7280" stroke-width="1.4" stroke-dasharray="5,4" marker-end="url(#pbd-arrow)"/>
+		<rect x="312" y="102" width="176" height="22" rx="4" fill="#FFFFFF"/>
+		<text x="400" y="117" fill="#6B7280" font-size="12" font-weight="600">&amp;offset 取出位址存進 p</text>
+
+		<!-- 下方連線：*p 順著位址讀寫 offset -->
+		<path d="M510 162 C445 232, 355 232, 294 166" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#pbd-arrow-accent)"/>
+		<rect x="320" y="216" width="160" height="24" rx="4" fill="#EBF7F3"/>
+		<text x="400" y="232" fill="#059669" font-size="13" font-weight="600">*p 沿著位址直接改 offset</text>
+
+		<!-- 底部對比提醒 -->
+		<rect x="110" y="262" width="580" height="36" rx="6" fill="#F8FAFC" stroke="#E5E7EB" stroke-width="1"/>
+		<text x="400" y="285" fill="#111827" font-size="13">宣告寫 int *p（表示型別）；使用寫 *p = 8（表示順著位址進去改值）</text>
+	</g>
+</svg>
